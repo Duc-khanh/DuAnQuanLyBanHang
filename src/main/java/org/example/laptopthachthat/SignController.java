@@ -1,4 +1,4 @@
 package org.example.laptopthachthat;
 
-public class Login {
+public class SignController {
 }

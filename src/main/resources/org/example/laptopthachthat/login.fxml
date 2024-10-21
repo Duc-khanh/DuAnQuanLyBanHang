@@ -13,7 +13,8 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0"
+            xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1">
    <left>
       <AnchorPane prefHeight="400.0" prefWidth="326.0" styleClass="vbox_background_center" stylesheets="@login.css" BorderPane.alignment="CENTER">
          <children>
@@ -43,12 +44,12 @@
             <PasswordField fx:id="PasswordTextFile" layoutX="52.0" layoutY="200.0" prefHeight="29.0" prefWidth="169.0" promptText="Password" style="-fx-border-color: #0598ff; -fx-border-width: 0px 0px 2px 0px;" />
             <ImageView fitHeight="111.0" fitWidth="116.0" layoutX="72.0" layoutY="7.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@images.jpeg" />
+                  <Image url="@Image/images.jpeg" />
                </image>
             </ImageView>
             <ImageView fitHeight="24.0" fitWidth="27.0" layoutX="22.0" layoutY="161.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@office-man.png" />
+                  <Image url="@Image/office-man.png" />
                </image>
             </ImageView>
             <ImageView fitHeight="23.0" fitWidth="25.0" layoutX="43.0" layoutY="243.0" pickOnBounds="true" preserveRatio="true" />
@@ -61,7 +62,7 @@
                </font></Text>
             <ImageView fitHeight="29.0" fitWidth="29.0" layoutX="20.0" layoutY="200.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@Img.png" />
+                  <Image url="@Image/Img.png" />
                </image>
             </ImageView>
             <Button fx:id="SignupButton" layoutX="64.0" layoutY="309.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="140.0" style="-fx-background-color: #FFD700;" text="Sign up" textFill="WHITE" />

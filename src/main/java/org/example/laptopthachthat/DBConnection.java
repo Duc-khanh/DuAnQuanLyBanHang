@@ -1,4 +1,4 @@
-package com.example.duancanstrore;
+package org.example.laptopthachthat;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -14,5 +14,5 @@ public class DBConnection {
         }
         return DriverManager.getConnection(URL, USER, PASS);
     }
-
+// comment
 }

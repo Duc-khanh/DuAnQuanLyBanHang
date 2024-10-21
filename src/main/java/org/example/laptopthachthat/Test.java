@@ -1,4 +1,4 @@
-package com.example.duancanstrore;
+package org.example.laptopthachthat;
 
 import java.sql.Connection;
 import java.sql.ResultSet;
