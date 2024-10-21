@@ -12,7 +12,7 @@ public class Test {
 
     public Test() throws SQLException {
         // Khởi tạo kết nối và câu lệnh SQL
-        connection = DBConnection.getConnection(1);
+        connection = DBConnection.getConnection();
         statement = connection.createStatement();
 
         // Thực thi truy vấn
