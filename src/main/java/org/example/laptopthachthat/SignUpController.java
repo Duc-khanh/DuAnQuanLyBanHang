@@ -110,5 +110,4 @@ public class SignUpController {
     private boolean ValidatePassword(String password) {
         return password.matches("^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)[a-zA-Z\\d]{8,}$");
     }
-    // haha
 }
