@@ -1,0 +1,6 @@
+.vbox_background_center{
+     -fx-background-color: linear-gradient(to bottom left ,#00CCFF,#99FFFF)
+}
+.vbox_background_right{
+    -fx-background-color:#EEE8AA ;
+}
