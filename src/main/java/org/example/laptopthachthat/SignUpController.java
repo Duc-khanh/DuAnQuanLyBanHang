@@ -42,7 +42,7 @@ public class SignUpController {
         stage.setScene(scene);
         stage.show();
     }
-
+// haha
 
     @FXML
     private void registerUser() {
