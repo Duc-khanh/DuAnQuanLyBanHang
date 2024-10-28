@@ -2,112 +2,129 @@ package org.example.laptopthachthat;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Node;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.Alert;
-import javafx.scene.control.Label;
+import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
-import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.stage.Stage;
+import javafx.fxml.FXMLLoader;
+import org.example.laptopthachthat.DBConnection;
 
 public class SignUpController {
-    @FXML
-    private TextField UsernameTextFile;
-    @FXML
-    private TextField PasswordTextFile;
-    @FXML
-    private TextField ConfirmPasswordTextFile;
-    @FXML
-    private TextField AddressTextFile;
-    @FXML
-    private TextField PhoneNumberTextFile;
-    @FXML
-    private Label error;
 
-    private void showAlert(Alert.AlertType alertType, String title, String message) {
-        Alert alert = new Alert(alertType);
-        alert.setTitle(title);
-        alert.setHeaderText(title);
+    @FXML
+    private TextField username;
+    @FXML
+    private PasswordField password;
+    @FXML
+    private PasswordField rePassword;
+    @FXML
+    private TextField phoneNumber;
+    @FXML
+    private TextField address;
+
+    private static final String PHONE_REGEX = "^0\\d{9}$";  // Validates a 10-digit phone number starting with 0
+    private static final String ADDRESS_REGEX = "^(?=.*[A-Za-zÀ-ỹ])[A-Za-zÀ-ỹ0-9\\s]+(?:\\s[A-Za-zÀ-ỹ\\s]+)*$";  // Allows letters, numbers, spaces
+
+    public void signUp(ActionEvent actionEvent) throws SQLException {
+        String username = this.username.getText().trim();
+        String password = this.password.getText().trim();
+        String rePassword = this.rePassword.getText().trim();
+        String address = this.address.getText().trim();
+        String phoneNumber = this.phoneNumber.getText().trim();
+
+        // Validate inputs
+        if (username.isEmpty() || password.isEmpty() || rePassword.isEmpty() || address.isEmpty() || phoneNumber.isEmpty()) {
+            showAlert("All fields must be filled.");
+        } else if (username.length() < 6) {
+            showAlert("Username must be at least 6 characters long.");
+        } else if (password.length() < 8) {
+            showAlert("Password must be at least 8 characters long.");
+        } else if (!password.equals(rePassword)) {
+            showAlert("Passwords do not match.");
+        } else if (!isValidPhoneNumber(phoneNumber)) {
+            showAlert("Invalid phone number. It should be 10 digits and start with 0.");
+        } else if (!isValidAddress(address)) {
+            showAlert("Invalid address format.");
+        } else if (checkAccount(username)) {
+            showAlert("Username is already taken.");
+        } else {
+            saveUser(username, password, address, phoneNumber);
+            showAlert("Sign up successful!");
+
+            try {
+                changeScene("Login.fxml");
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
+    private void saveUser(String username, String password, String address, String phoneNumber) throws SQLException {
+        Connection conn = DBConnection.getConnection();
+        String query = "INSERT INTO User(role, state, username, password, address, phoneNumber) VALUES(?,?,?, ?, ?, ?)";
+        try (PreparedStatement ps = conn.prepareStatement(query)) {
+            ps.setString(1, "customers");
+            ps.setString(2, "Active");
+            ps.setString(3, username);
+            ps.setString(4, password);
+            ps.setString(5, address);
+            ps.setString(6, phoneNumber);
+            ps.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private boolean checkAccount(String username) throws SQLException {
+        Connection conn = DBConnection.getConnection();
+        String query = "SELECT username FROM User WHERE username = ?";
+        try (PreparedStatement ps = conn.prepareStatement(query)) {
+            ps.setString(1, username);
+            ResultSet rs = ps.executeQuery();
+            return rs.next();
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
+
+    private boolean isValidPhoneNumber(String phoneNumber) {
+        return phoneNumber.matches(PHONE_REGEX);
+    }
+
+    private boolean isValidAddress(String address) {
+        return address.matches(ADDRESS_REGEX);
+    }
+
+    private void showAlert(String message) {
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setHeaderText(null);
         alert.setContentText(message);
         alert.showAndWait();
     }
-    public void BackToSignin(ActionEvent event) throws IOException {
-        Parent root = FXMLLoader.load(LoginApplication.class.getResource("Login.fxml"));
-        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        Scene scene = new Scene(root);
-        stage.setTitle("Sign up");
-        stage.setScene(scene);
+
+    private void changeScene(String fxmlFile) throws IOException {
+        Parent root = FXMLLoader.load(getClass().getResource(fxmlFile));
+        Stage stage = (Stage) username.getScene().getWindow();
+        stage.setScene(new Scene(root));
         stage.show();
     }
-// haha
 
-    @FXML
-    private void registerUser() {
-        String username = UsernameTextFile.getText();
-        String password = PasswordTextFile.getText();
-        String confirmPassword = ConfirmPasswordTextFile.getText();
-        String address = AddressTextFile.getText();
-        String phoneNumber = PhoneNumberTextFile.getText();
-
-        if (username.isEmpty()) {
-            showAlert(Alert.AlertType.ERROR, "Form Error!", "Username is required");
-            return;
+    public void showLogin(ActionEvent actionEvent) {
+        try {
+            changeScene("Login.fxml");
+        } catch (Exception e) {
+            e.printStackTrace();
         }
 
-        if (!ValidateUsername(username)) {
-            showAlert(Alert.AlertType.ERROR, "Form Error!", "Username must have a length of 3 to 15 characters and contain only letters, numbers, underscores _, or hyphens -.");
-            return;
-        }
-
-        if (password.isEmpty()) {
-            showAlert(Alert.AlertType.ERROR, "Form Error!", "Password is required");
-            return;
-        }
-
-        if (!ValidatePassword(password)) {  // Corrected the logic here
-            showAlert(Alert.AlertType.ERROR, "Form Error!", "Password must be at least 8 characters long and contain at least one uppercase letter, one lowercase letter, and one number.");
-            return;
-        }
-
-        if (confirmPassword.isEmpty()) {
-            showAlert(Alert.AlertType.ERROR, "Form Error!", "Confirm Password is required");
-            return;
-        }
-
-        if (!password.equals(confirmPassword)) {
-            showAlert(Alert.AlertType.ERROR, "Form Error!", "Passwords do not match.");
-            return;
-        }
-
-        if (phoneNumber.isEmpty()) {
-            showAlert(Alert.AlertType.ERROR, "Form Error!", "Phone number is required");
-            return;
-        }
-
-        if (!ValidatePhoneNumber(phoneNumber)) {
-            showAlert(Alert.AlertType.ERROR, "Form Error!", "Phone number must be 10 or 11 digits.");
-            return;
-        }
-
-        if (address.isEmpty()) {
-            showAlert(Alert.AlertType.ERROR, "Form Error!", "Address is required");
-            return;
-        }
-
-    }
-
-    private boolean ValidateUsername(String username) {
-        return username.matches("^[a-zA-Z0-9_-]{3,15}$");
-    }
-
-    private boolean ValidatePhoneNumber(String phoneNumber) {
-        return phoneNumber.matches("^0(9[0-9]{8}|1[0-9]{9}|7[0-9]{8})$");
-    }
-
-    private boolean ValidatePassword(String password) {
-        return password.matches("^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)[a-zA-Z\\d]{8,}$");
     }
 }
