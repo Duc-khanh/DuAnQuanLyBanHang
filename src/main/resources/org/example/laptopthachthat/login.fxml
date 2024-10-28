@@ -19,7 +19,7 @@
          <children>
             <ImageView fitHeight="192.0" fitWidth="232.0" layoutX="57.0" layoutY="93.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@pngtree-mummy-yellow-laptop-sticker-vector-png-image_12226763.png" />
+                  <Image url="@Image/pngtree-mummy-yellow-laptop-sticker-vector-png-image_12226763.png" />
                </image>
             </ImageView>
             <Label layoutX="79.0" layoutY="286.0" text="MacBook" textFill="GOLD">
