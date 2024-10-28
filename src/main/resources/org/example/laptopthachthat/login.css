@@ -4,3 +4,21 @@
 .vbox_background_right{
     -fx-background-color:#EEE8AA ;
 }
+.search-box{
+    -fx-background-color: #FFFFFF;
+    -fx-background-radius: 100;
+}
+.search-button{
+    -fx-background-color: #00e5ff;
+    -fx-background-radius: 30;
+}
+.shadow{
+    -fx-effect: dropShadow(three-pass-box,rgba(0,0,0,0.1),10.0 ,0.0, 0.0, 10.0);
+}
+.chosen-fruit-card{
+    -fx-background-radius: 30;
+}
+.click-buy{
+    -fx-background-color: #FFFFFF;
+    -fx-background-radius: 100;
+}
