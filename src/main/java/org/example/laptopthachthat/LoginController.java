@@ -6,10 +6,9 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.PasswordField;
-import javafx.scene.control.TextField;
+
+import javafx.scene.control.*;
+
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -19,47 +18,95 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 public class LoginController {
-    @FXML
-    private TextField UsernameTextFile;
-    @FXML
-    private PasswordField PasswordTextFile;
-    @FXML
-    private Button SigninButton;
-    @FXML
-    private Label error;
 
-    private ConectionJDBC conectionJDBC = new ConectionJDBC();
-    @FXML
-    public void TextLogin() throws SQLException {
-        String Username = UsernameTextFile.getText();
-        String Password = PasswordTextFile.getText();
 
-        boolean role = Signin(Username, Password);
-        if (role) {
-            error.setText("Login Successful");
+    @FXML
+    private TextField username;
+    @FXML
+    private PasswordField password;
+    @FXML
+    private Button signInButton;
+    @FXML
+    private Button signUpButton;
+
+    @FXML
+    public void initialize() {
+
+    }
+
+    @FXML
+    public void signIn(ActionEvent actionEvent) throws SQLException, IOException {
+        String username = this.username.getText();
+        String password = this.password.getText();
+
+
+        System.out.println("Attempting to login with username: " + username + " and password: " + password);
+
+        if (username.isEmpty() || password.isEmpty()) {
+            showAlert("Vui lòng nhập tên người dùng và mặt khẩu để đăng kí vay tiền");
+            return;
+        }
+        String role = checkUser(username, password);
+        if (role != null) {
+            System.out.println("Đang nhap thanh cong" );
+
+            switch (role) {
+                case "Admin":
+                    showAlert("Đăng nhập thành công .Xin chào Admin   " + username);
+                    LoginApplication.changeScene("AdminDashboard.fxml");
+                    break;
+                case "User":
+                    showAlert("Đăng nhập thành công .Xin chào User");
+
+                    LoginApplication.changeScene("UserDashboard.fxml");
+                    break;
+                case "Customer":
+                    showAlert("Đăng nhập thành công .Xin chào Customer");
+
+                    LoginApplication.changeScene("CustomerDashboard.fxml");
+                    break;
+                default:
+                    showAlert("Vai trò không được công nhận. ");
+            }
         } else {
-            error.setText("Login Failed");
+            System.out.println("Đăng Nhập Không Thành Công");
+            showAlert("Tên người dùng hoặc mật khẩu không hợp lệ.");
+            this.username.requestFocus();
         }
     }
 
-    public boolean Signin(String userName, String password) throws SQLException {
-        String query = "SELECT * FROM User WHERE username = ? AND password = ?";
+    private String checkUser(String username, String password) throws SQLException {
+        Connection conn = DBConnection.getConnection();
+        if (conn == null) {
+            showAlert("Kết Nối Dữ Liệu Không Thành Công");
+            return null;
+        }
 
-        try (Connection conn = conectionJDBC.getConnection();
-             PreparedStatement pstmt = conn.prepareStatement(query)) {
-            pstmt.setString(1, userName);
-            pstmt.setString(2, password);
-            ResultSet rs = pstmt.executeQuery();
-            return rs.next();
+        String query = "SELECT * FROM user WHERE username=? AND password=?";
+        try (PreparedStatement ps = conn.prepareStatement(query)) {
+            ps.setString(1, username);
+            ps.setString(2, password);
+            ResultSet rs = ps.executeQuery();
 
-        } catch (Exception e) {
+            if (rs.next()) {
+                String state = rs.getString("state");
+                if (!"Active".equalsIgnoreCase(state)) {
+                    showAlert("Your account is blocked. Please contact support.");
+                    return null;
+                }
+                return rs.getString("role");
+            } else {
+                return null;
+            }
+        } catch (SQLException e) {
             e.printStackTrace();
+            showAlert("Database error occurred!");
+            return null;
         }
-
-        return false;
     }
 
-    public void switchToDisplayLogin(ActionEvent event) throws IOException {
+    public void showSignUp(ActionEvent event) throws IOException {
+
         Parent root = FXMLLoader.load(LoginApplication.class.getResource("Register.fxml"));
         Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         Scene scene = new Scene(root);
@@ -68,5 +115,10 @@ public class LoginController {
         stage.show();
     }
 
+    private void showAlert(String message) {
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setHeaderText(null);
+        alert.setContentText(message);
+        alert.showAndWait();
     }
-
+}

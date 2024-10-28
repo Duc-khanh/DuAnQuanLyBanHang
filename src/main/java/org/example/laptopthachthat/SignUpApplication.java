@@ -6,6 +6,9 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 
 public class SignUpApplication extends Application {
+    public static void changeScene(String s) {
+    }
+
     @Override
     public void start(Stage primaryStage) throws Exception {
         FXMLLoader fxmlLoader = new FXMLLoader(SignUpApplication.class.getResource("Register.fxml"));
@@ -19,3 +22,4 @@ public class SignUpApplication extends Application {
         launch(args);
     }
 }
+
