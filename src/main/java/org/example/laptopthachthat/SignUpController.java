@@ -16,7 +16,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 import javafx.fxml.FXMLLoader;
-import org.example.laptopthachthat.DBConnection;
+import org.example.laptopthachthat.ConectionJDBC;
 
 public class SignUpController {
 
@@ -69,7 +69,7 @@ public class SignUpController {
     }
 
     private void saveUser(String username, String password, String address, String phoneNumber) throws SQLException {
-        Connection conn = DBConnection.getConnection();
+        Connection conn = ConectionJDBC.getConnection();
         String query = "INSERT INTO User(role, state, username, password, address, phoneNumber) VALUES(?,?,?, ?, ?, ?)";
         try (PreparedStatement ps = conn.prepareStatement(query)) {
             ps.setString(1, "customers");
@@ -85,7 +85,7 @@ public class SignUpController {
     }
 
     private boolean checkAccount(String username) throws SQLException {
-        Connection conn = DBConnection.getConnection();
+        Connection conn = ConectionJDBC.getConnection();
         String query = "SELECT username FROM User WHERE username = ?";
         try (PreparedStatement ps = conn.prepareStatement(query)) {
             ps.setString(1, username);
