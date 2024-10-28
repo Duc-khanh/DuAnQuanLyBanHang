@@ -8,7 +8,7 @@ public class ConectionJDBC {
     private String hostName = "localhost:3306";
     private String dbName = "LapTopThachThat";
     private String username = "root";
-    private String password = "root@123";
+    private String password = "linhnhi234";
     private String url = "jdbc:mysql://" + hostName + "/" + dbName;
     public Connection getConnection() throws SQLException {
         Connection conn = null;
