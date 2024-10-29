@@ -23,7 +23,7 @@ public class SignUpController {
     @FXML
     private TextField username;
     @FXML
-    private PasswordField password;
+    private PasswordField passwordTextFile;
     @FXML
     private PasswordField rePassword;
     @FXML
@@ -36,7 +36,7 @@ public class SignUpController {
 
     public void signUp(ActionEvent actionEvent) throws SQLException {
         String username = this.username.getText().trim();
-        String password = this.password.getText().trim();
+        String password = this.passwordTextFile.getText().trim();
         String rePassword = this.rePassword.getText().trim();
         String address = this.address.getText().trim();
         String phoneNumber = this.phoneNumber.getText().trim();
@@ -72,7 +72,7 @@ public class SignUpController {
         Connection conn = ConectionJDBC.getConnection();
         String query = "INSERT INTO User(role, state, username, password, address, phoneNumber) VALUES(?,?,?, ?, ?, ?)";
         try (PreparedStatement ps = conn.prepareStatement(query)) {
-            ps.setString(1, "customers");
+            ps.setString(1, "Customer");
             ps.setString(2, "Active");
             ps.setString(3, username);
             ps.setString(4, password);

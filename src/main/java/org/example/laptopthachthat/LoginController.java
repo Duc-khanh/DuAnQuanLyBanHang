@@ -8,7 +8,6 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 
 import javafx.scene.control.*;
-
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -43,7 +42,7 @@ public class LoginController {
         System.out.println("Attempting to login with username: " + username + " and password: " + password);
 
         if (username.isEmpty() || password.isEmpty()) {
-            showAlert("Vui lòng nhập tên người dùng và mặt khẩu để đăng kí vay tiền");
+            showAlert("Vui lòng nhập tên người dùng và mặt khẩu để đăng nhập");
             return;
         }
         String role = checkUser(username, password);
@@ -53,7 +52,7 @@ public class LoginController {
             switch (role) {
                 case "Admin":
                     showAlert("Đăng nhập thành công .Xin chào Admin   " + username);
-                    LoginApplication.changeScene("AdminDashboard.fxml");
+                    LoginApplication.changeScene("User.fxml");
                     break;
                 case "User":
                     showAlert("Đăng nhập thành công .Xin chào User");
@@ -105,6 +104,10 @@ public class LoginController {
         }
     }
 
+    public void switchToDisplayRegister(ActionEvent event) throws IOException {
+
+    }
+
     public void showSignUp(ActionEvent event) throws IOException {
 
         Parent root = FXMLLoader.load(LoginApplication.class.getResource("Register.fxml"));
@@ -120,5 +123,8 @@ public class LoginController {
         alert.setHeaderText(null);
         alert.setContentText(message);
         alert.showAndWait();
+    }
+
+    public void TextLogin(ActionEvent actionEvent) {
     }
 }

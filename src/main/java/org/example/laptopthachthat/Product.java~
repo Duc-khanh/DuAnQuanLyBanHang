@@ -13,7 +13,7 @@ public class Product {
         private int quality;
         private double price;
 
-
+      
         public Product(int productID, boolean stock, Image image, String productName, String description, int quality, double price) {
             this.productID = productID;
             this.stock = stock;
