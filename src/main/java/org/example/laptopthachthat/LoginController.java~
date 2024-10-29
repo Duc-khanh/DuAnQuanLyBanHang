@@ -76,7 +76,7 @@ public class LoginController {
     }
 
     private String checkUser(String username, String password) throws SQLException {
-        Connection conn = ConectionJDBC.getConnection();
+        Connection conn = DBConnection.getConnection();
         if (conn == null) {
             showAlert("Kết Nối Dữ Liệu Không Thành Công");
             return null;
