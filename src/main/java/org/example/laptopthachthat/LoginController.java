@@ -103,13 +103,9 @@ public class LoginController {
             return null;
         }
     }
+
     public void switchToDisplayRegister(ActionEvent event) throws IOException {
-        Parent root = FXMLLoader.load(LoginApplication.class.getResource("Register.fxml"));
-        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        Scene scene = new Scene(root);
-        stage.setTitle("Login");
-        stage.setScene(scene);
-        stage.show();
+
     }
 
     public void showSignUp(ActionEvent event) throws IOException {
@@ -129,4 +125,6 @@ public class LoginController {
         alert.showAndWait();
     }
 
+    public void TextLogin(ActionEvent actionEvent) {
+    }
 }

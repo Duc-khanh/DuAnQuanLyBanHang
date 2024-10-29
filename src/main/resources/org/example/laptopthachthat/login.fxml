@@ -39,8 +39,8 @@
    <center>
       <AnchorPane prefHeight="400.0" prefWidth="280.0" style="-fx-background-color: transperant; -fx-border-color: #ffa601; -fx-border-width: 0px 0px 2px 0px;" BorderPane.alignment="CENTER">
          <children>
-            <TextField fx:id="UsernameTextFile" layoutX="51.0" layoutY="159.0" prefHeight="29.0" prefWidth="169.0" promptText="Username" style="-fx-border-color: #ffa601; -fx-border-width: 0px 0px 2px 0px;" />
-            <PasswordField fx:id="PasswordTextFile" layoutX="52.0" layoutY="200.0" prefHeight="29.0" prefWidth="169.0" promptText="Password" style="-fx-border-color: #ffa601; -fx-border-width: 0px 0px 2px 0px;" />
+            <TextField fx:id="username" layoutX="51.0" layoutY="159.0" prefHeight="29.0" prefWidth="169.0" promptText="Username" style="-fx-border-color: #ffa601; -fx-border-width: 0px 0px 2px 0px;" />
+            <PasswordField fx:id="password" layoutX="52.0" layoutY="200.0" prefHeight="29.0" prefWidth="169.0" promptText="Password" style="-fx-border-color: #ffa601; -fx-border-width: 0px 0px 2px 0px;" />
             <ImageView fitHeight="111.0" fitWidth="116.0" layoutX="72.0" layoutY="7.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@Image/office-man.png" />
@@ -53,7 +53,7 @@
             </ImageView>
             <ImageView fitHeight="23.0" fitWidth="25.0" layoutX="43.0" layoutY="243.0" pickOnBounds="true" preserveRatio="true" />
 
-            <Button fx:id="SigninButton" layoutX="64.0" layoutY="260.0" mnemonicParsing="false" onAction="#TextLogin" prefHeight="31.0" prefWidth="139.0" style="-fx-background-color: #FFD700;" text="Sign in" textFill="WHITE" />
+            <Button fx:id="signInButton" layoutX="64.0" layoutY="260.0" mnemonicParsing="false" onAction="#signIn" prefHeight="31.0" prefWidth="139.0" style="-fx-background-color: #FFD700;" text="Sign in" textFill="WHITE" />
             <Hyperlink layoutX="64.0" layoutY="368.0" text="For got your password" />
             <Text fill="#bc8640" layoutX="98.0" layoutY="150.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Sign in" wrappingWidth="58.30989456176758">
                <font>
@@ -64,7 +64,7 @@
                   <Image url="@Image/3917787.png" />
                </image>
             </ImageView>
-            <Button fx:id="SignupButton" layoutX="64.0" layoutY="309.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="140.0" style="-fx-background-color: #FFD700;" text="Sign up" textFill="WHITE" />
+            <Button fx:id="signupButton"  onAction="#showSignUp" layoutX="64.0" layoutY="309.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="140.0" style="-fx-background-color: #FFD700;" text="Sign up" textFill="WHITE" />
             <Label fx:id="error" layoutX="57.0" layoutY="235.0" prefHeight="18.0" prefWidth="137.0" />
          </children>
       </AnchorPane>

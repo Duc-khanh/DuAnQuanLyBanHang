@@ -6,6 +6,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.image.Image;
 import org.example.laptopthachthat.Product;
 import org.example.laptopthachthat.ProductAdd;
 
@@ -19,6 +20,8 @@ public class ProductController {
     private TableColumn<Product, Integer> idColumn;
     @FXML
     private TableColumn<Product, Boolean> stocKColumn;
+    @FXML
+    private TableColumn<Product , Image> imageColumn;
     @FXML
     private TableColumn<Product, String> nameColumn;
     @FXML
@@ -34,6 +37,7 @@ public class ProductController {
     public void initialize() {
         idColumn.setCellValueFactory(new PropertyValueFactory<>("id"));
         stocKColumn.setCellValueFactory(new PropertyValueFactory<>("stocK"));
+        imageColumn.setCellValueFactory(new PropertyValueFactory<>("image"));
         nameColumn.setCellValueFactory(new PropertyValueFactory<>("name"));
         descriptionColumn.setCellValueFactory(new PropertyValueFactory<>("description"));
         quantityColumn.setCellValueFactory(new PropertyValueFactory<>("quantity"));
@@ -49,8 +53,8 @@ public class ProductController {
     }
 
     private void loadProducts() throws SQLException {
-        ProductAdd productDAO = new ProductAdd();
-        List<Product> products = productDAO.getProduct();
+        ProductAdd productAdd = new ProductAdd();
+        List<Product> products = productAdd.getProduct();
         productList.addAll(products);
     }
 }

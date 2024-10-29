@@ -9,7 +9,8 @@
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.laptopthachthat.SignUpApplication">
+<?import javafx.scene.control.PasswordField?>
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.laptopthachthat.SignUpController">
    <children>
       <BorderPane prefHeight="400.0" prefWidth="600.0">
          <left>
@@ -36,11 +37,11 @@
          <right>
             <AnchorPane prefHeight="400.0" prefWidth="297.0" BorderPane.alignment="CENTER">
                <children>
-                  <TextField fx:id="UsernameTextFile" layoutX="34.0" layoutY="144.0" prefHeight="29.0" prefWidth="206.0" promptText="UserName" style="-fx-border-color: #ffa601; -fx-background-color: transperant; -fx-border-width: 0px 0px 2px 0px;" stylesheets="@login.css" />
-                  <TextField fx:id="PasswordTextFile" layoutX="35.0" layoutY="180.0" prefHeight="29.0" prefWidth="206.0" promptText="Password" style="-fx-border-color: #ffa601; -fx-background-color: transperant; -fx-border-width: 0px 0px 2px 0px;" stylesheets="@login.css" />
-                  <TextField fx:id="PasswordpasswordTextFile" layoutX="35.0" layoutY="214.0" prefHeight="29.0" prefWidth="206.0" promptText="Confirm password" style="-fx-border-color: #ffa601; -fx-background-color: transperant; -fx-border-width: 0px 0px 2px 0px;" stylesheets="@login.css" />
-                  <TextField fx:id="AddressTextFile" layoutX="35.0" layoutY="251.0" prefHeight="29.0" prefWidth="206.0" promptText="Address" style="-fx-border-color: #ffa601; -fx-background-color: transperant; -fx-border-width: 0px 0px 2px 0px;" stylesheets="@login.css" />
-                  <TextField fx:id="PhoneNumberTextFile" layoutX="35.0" layoutY="289.0" prefHeight="29.0" prefWidth="206.0" promptText="Phone number" style="-fx-border-color: #ffa601; -fx-background-color: transperant; -fx-border-width: 0px 0px 2px 0px;" stylesheets="@login.css" />
+                  <TextField fx:id="username" layoutX="34.0" layoutY="144.0" prefHeight="29.0" prefWidth="206.0" promptText="UserName" style="-fx-border-color: #ffa601; -fx-background-color: transperant; -fx-border-width: 0px 0px 2px 0px;" stylesheets="@login.css" />
+                  <PasswordField fx:id="passwordTextFile" layoutX="35.0" layoutY="180.0" prefHeight="29.0" prefWidth="206.0" promptText="Password" style="-fx-border-color: #ffa601; -fx-background-color: transperant; -fx-border-width: 0px 0px 2px 0px;" stylesheets="@login.css" />
+                  <PasswordField fx:id="rePassword" layoutX="35.0" layoutY="214.0" prefHeight="29.0" prefWidth="206.0" promptText="Confirm password" style="-fx-border-color: #ffa601; -fx-background-color: transperant; -fx-border-width: 0px 0px 2px 0px;" stylesheets="@login.css" />
+                  <TextField fx:id="address" layoutX="35.0" layoutY="251.0" prefHeight="29.0" prefWidth="206.0" promptText="Address" style="-fx-border-color: #ffa601; -fx-background-color: transperant; -fx-border-width: 0px 0px 2px 0px;" stylesheets="@login.css" />
+                  <TextField fx:id="phoneNumber" layoutX="35.0" layoutY="289.0" prefHeight="29.0" prefWidth="206.0" promptText="Phone number" style="-fx-border-color: #ffa601; -fx-background-color: transperant; -fx-border-width: 0px 0px 2px 0px;" stylesheets="@login.css" />
                   <ImageView fitHeight="94.0" fitWidth="93.0" layoutX="98.0" layoutY="9.0" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@Image/office-man.png" />
@@ -51,8 +52,8 @@
                         <Font size="24.0" />
                      </font>
                   </Label>
-                  <Button layoutX="27.0" layoutY="350.0" mnemonicParsing="false" prefHeight="27.0" prefWidth="94.0" style="-fx-background-color: #FFD700;" text="Sign Up" />
-                  <Button fx:id="BackToSignIn" layoutX="151.0" layoutY="349.0" mnemonicParsing="false" prefHeight="27.0" prefWidth="106.0" style="-fx-background-color: #FFD700;" text="Back to sign in" />
+                  <Button layoutX="27.0" layoutY="350.0" mnemonicParsing="false" onAction="#signUp" prefHeight="27.0" prefWidth="94.0" style="-fx-background-color: #FFD700;" text="Sign Up" />
+                  <Button layoutX="151.0" layoutY="349.0" mnemonicParsing="false" onAction="#showLogin" prefHeight="27.0" prefWidth="106.0" style="-fx-background-color: #FFD700;" text="Back to sign in" />
                   <ImageView fitHeight="20.0" fitWidth="18.0" layoutX="11.0" layoutY="188.0" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@Image/3917787.png" />

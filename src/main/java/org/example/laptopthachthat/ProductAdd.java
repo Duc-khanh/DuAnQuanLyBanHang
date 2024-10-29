@@ -12,7 +12,7 @@ public class ProductAdd {
         List<Product> products = new ArrayList<>();
         ConectionJDBC c = new ConectionJDBC();
         Connection con = c.getConnection();
-        String query = "SELECT * FROM product";
+        String query = "SELECT * FROM products";
         PreparedStatement ps = con.prepareStatement(query);
         ResultSet rs = ps.executeQuery();
         while (rs.next()) {

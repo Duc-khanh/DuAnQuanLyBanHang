@@ -8,8 +8,9 @@ public class ConectionJDBC {
     private static String hostName = "localhost:3306";
     private static String dbName = "LapTopThachThat";
     private static String username = "root";
-    private static String password = "linhnhi234";
+    private static String password = "root@123";
     private static String url = "jdbc:mysql://" + hostName + "/" + dbName;
+
     public static Connection getConnection() throws SQLException {
         Connection conn = null;
         try{
@@ -19,5 +20,10 @@ public class ConectionJDBC {
             e.printStackTrace();
         }
         return conn;
+    }
+
+    public static void main(String[] args) {
+
+
     }
 }
