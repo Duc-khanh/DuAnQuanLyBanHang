@@ -16,7 +16,6 @@ public class UserAplication extends Application {
         stage.setScene(scene);
         stage.show();
     }
-//skjdalksjhadkdasaddad
     public static void main(String[] args) {
         launch();
     }
