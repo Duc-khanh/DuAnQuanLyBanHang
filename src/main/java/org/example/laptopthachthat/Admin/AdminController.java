@@ -1,4 +1,4 @@
-package org.example.laptopthachthat;
+package org.example.laptopthachthat.Admin;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -7,6 +7,8 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.Image;
+import org.example.laptopthachthat.ConectionJDBC;
+import org.example.laptopthachthat.User.Product;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -83,8 +85,8 @@ public class AdminController {
                 String description = rs.getString("description");
                 String status = rs.getString("stock");
                 String image = rs.getString("Image");
-
-                products.add(new Product(id, name, price, quantity, description, status, image));
+//
+//                products.add(new Product(id, name, price, quantity, description, status, image));
             }
         } catch (SQLException e) {
             e.printStackTrace();

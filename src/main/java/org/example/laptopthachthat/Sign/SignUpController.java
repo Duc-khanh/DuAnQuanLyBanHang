@@ -1,4 +1,4 @@
-package org.example.laptopthachthat;
+package org.example.laptopthachthat.Sign;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -17,6 +17,7 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 import javafx.fxml.FXMLLoader;
 import org.example.laptopthachthat.ConectionJDBC;
+import org.example.laptopthachthat.Main;
 
 public class SignUpController {
 
@@ -61,7 +62,7 @@ public class SignUpController {
             showAlert("Sign up successful!");
 
             try {
-                changeScene("Login.fxml");
+                Main.changeScene("Login.fxml");
             } catch (Exception e) {
                 e.printStackTrace();
             }
@@ -112,16 +113,16 @@ public class SignUpController {
         alert.showAndWait();
     }
 
-    private void changeScene(String fxmlFile) throws IOException {
-        Parent root = FXMLLoader.load(getClass().getResource(fxmlFile));
-        Stage stage = (Stage) username.getScene().getWindow();
-        stage.setScene(new Scene(root));
-        stage.show();
-    }
+//    private void changeScene(String fxmlFile) throws IOException {
+//        Parent root = FXMLLoader.load(getClass().getResource(fxmlFile));
+//        Stage stage = (Stage) username.getScene().getWindow();
+//        stage.setScene(new Scene(root));
+//        stage.show();
+//    }
 
     public void showLogin(ActionEvent actionEvent) {
         try {
-            changeScene("Login.fxml");
+            Main.changeScene("Login.fxml");
         } catch (Exception e) {
             e.printStackTrace();
         }
