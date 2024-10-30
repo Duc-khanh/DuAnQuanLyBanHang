@@ -8,7 +8,7 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.Image;
 import org.example.laptopthachthat.ConectionJDBC;
-import org.example.laptopthachthat.User.Product;
+import org.example.laptopthachthat.Admin.Product;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
