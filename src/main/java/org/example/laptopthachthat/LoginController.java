@@ -8,7 +8,6 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 
 import javafx.scene.control.*;
-
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -76,7 +75,7 @@ public class LoginController {
     }
 
     private String checkUser(String username, String password) throws SQLException {
-        Connection conn = DBConnection.getConnection();
+        Connection conn = ConectionJDBC.getConnection();
         if (conn == null) {
             showAlert("Kết Nối Dữ Liệu Không Thành Công");
             return null;
@@ -105,6 +104,10 @@ public class LoginController {
         }
     }
 
+    public void switchToDisplayRegister(ActionEvent event) throws IOException {
+
+    }
+
     public void showSignUp(ActionEvent event) throws IOException {
 
         Parent root = FXMLLoader.load(LoginApplication.class.getResource("Register.fxml"));
@@ -120,5 +123,8 @@ public class LoginController {
         alert.setHeaderText(null);
         alert.setContentText(message);
         alert.showAndWait();
+    }
+
+    public void TextLogin(ActionEvent actionEvent) {
     }
 }

@@ -16,14 +16,14 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 import javafx.fxml.FXMLLoader;
-import org.example.laptopthachthat.DBConnection;
+import org.example.laptopthachthat.ConectionJDBC;
 
 public class SignUpController {
 
     @FXML
     private TextField username;
     @FXML
-    private PasswordField password;
+    private PasswordField passwordTextFile;
     @FXML
     private PasswordField rePassword;
     @FXML
@@ -36,7 +36,7 @@ public class SignUpController {
 
     public void signUp(ActionEvent actionEvent) throws SQLException {
         String username = this.username.getText().trim();
-        String password = this.password.getText().trim();
+        String password = this.passwordTextFile.getText().trim();
         String rePassword = this.rePassword.getText().trim();
         String address = this.address.getText().trim();
         String phoneNumber = this.phoneNumber.getText().trim();
@@ -69,10 +69,10 @@ public class SignUpController {
     }
 
     private void saveUser(String username, String password, String address, String phoneNumber) throws SQLException {
-        Connection conn = DBConnection.getConnection();
+        Connection conn = ConectionJDBC.getConnection();
         String query = "INSERT INTO User(role, state, username, password, address, phoneNumber) VALUES(?,?,?, ?, ?, ?)";
         try (PreparedStatement ps = conn.prepareStatement(query)) {
-            ps.setString(1, "customers");
+            ps.setString(1, "Customer");
             ps.setString(2, "Active");
             ps.setString(3, username);
             ps.setString(4, password);
@@ -85,7 +85,7 @@ public class SignUpController {
     }
 
     private boolean checkAccount(String username) throws SQLException {
-        Connection conn = DBConnection.getConnection();
+        Connection conn = ConectionJDBC.getConnection();
         String query = "SELECT username FROM User WHERE username = ?";
         try (PreparedStatement ps = conn.prepareStatement(query)) {
             ps.setString(1, username);
