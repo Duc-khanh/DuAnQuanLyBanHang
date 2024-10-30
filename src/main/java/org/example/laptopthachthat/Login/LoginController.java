@@ -1,4 +1,4 @@
-package org.example.laptopthachthat;
+package org.example.laptopthachthat.Login;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -9,6 +9,8 @@ import javafx.scene.Scene;
 
 import javafx.scene.control.*;
 import javafx.stage.Stage;
+import org.example.laptopthachthat.ConectionJDBC;
+import org.example.laptopthachthat.Main;
 
 import java.io.IOException;
 import java.sql.Connection;
@@ -42,7 +44,7 @@ public class LoginController {
         System.out.println("Attempting to login with username: " + username + " and password: " + password);
 
         if (username.isEmpty() || password.isEmpty()) {
-            showAlert("Vui lòng nhập tên người dùng và mặt khẩu để đăng kí vay tiền");
+            showAlert("Vui lòng nhập tên người dùng và mặt khẩu để đăng nhập");
             return;
         }
         String role = checkUser(username, password);
@@ -52,17 +54,17 @@ public class LoginController {
             switch (role) {
                 case "Admin":
                     showAlert("Đăng nhập thành công .Xin chào Admin   " + username);
-                    LoginApplication.changeScene("AdminDashboard.fxml");
+                    Main.changeScene("HomeAdmin.fxml");
                     break;
                 case "User":
                     showAlert("Đăng nhập thành công .Xin chào User");
 
-                    LoginApplication.changeScene("UserDashboard.fxml");
+                    Main.changeScene("UserDashboard.fxml");
                     break;
                 case "Customer":
                     showAlert("Đăng nhập thành công .Xin chào Customer");
 
-                    LoginApplication.changeScene("CustomerDashboard.fxml");
+                    Main.changeScene("CustomerDashboard.fxml");
                     break;
                 default:
                     showAlert("Vai trò không được công nhận. ");
@@ -110,7 +112,7 @@ public class LoginController {
 
     public void showSignUp(ActionEvent event) throws IOException {
 
-        Parent root = FXMLLoader.load(LoginApplication.class.getResource("Register.fxml"));
+        Parent root = FXMLLoader.load(Main.class.getResource("Register.fxml"));
         Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         Scene scene = new Scene(root);
         stage.setTitle("Sign up");
