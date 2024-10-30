@@ -28,11 +28,12 @@
                         <Font name="SignPainter-HouseScript" size="36.0" />
                     </font>
                 </Label>
-                <ImageView fitHeight="53.0" fitWidth="50.0" layoutX="31.0" layoutY="272.0" pickOnBounds="true" preserveRatio="true">
+                <ImageView fitHeight="53.0" fitWidth="50.0" layoutX="31.0" layoutY="272.0" pickOnBounds="true" preserveRatio="true" onMouseClicked="#showTableView">
                     <image>
                         <Image url="@Image/4439476.png" />
                     </image>
                 </ImageView>
+
                 <Label layoutX="102.0" layoutY="278.0" prefHeight="37.0" prefWidth="124.0" text="Laptop">
                     <font>
                         <Font name="Wingdings 3" size="24.0" />
@@ -85,17 +86,18 @@
 
         <AnchorPane layoutX="309.0" layoutY="172.0" prefHeight="610.0" prefWidth="971.0">
             <children>
-                <TableView fx:id="productTable" layoutX="8.0" layoutY="-2.0" prefHeight="677.0" prefWidth="1080.0">
+                <TableView fx:id="productTable" layoutX="8.0" layoutY="-2.0" prefHeight="677.0" prefWidth="1080.0" visible="false">
                     <columns>
                         <TableColumn fx:id="idColumn" prefWidth="89.0" text="ID" />
-                        <TableColumn fx:id="stockColumn" prefWidth="97.0" text="Stock" />
                         <TableColumn fx:id="imageColumn" prefWidth="149.0" text="Image" />
                         <TableColumn fx:id="nameColumn" prefWidth="203.0" text="Name" />
                         <TableColumn fx:id="describeColumn" prefWidth="219.0" text="Describe" />
                         <TableColumn fx:id="quantityColumn" prefWidth="151.0" text="Quantity" />
                         <TableColumn fx:id="priceColumn" minWidth="20.0" prefWidth="171.0" text="Price" />
+                        <TableColumn fx:id="stockColumn" prefWidth="97.0" text="Stock" />
                     </columns>
                 </TableView>
+
             </children>
         </AnchorPane>
     </children>
