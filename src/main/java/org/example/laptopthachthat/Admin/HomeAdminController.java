@@ -39,7 +39,7 @@ public class HomeAdminController {
 
     @FXML
     public void initialize() {
-
+        // Khởi tạo dữ liệu cột
         idColumn.setCellValueFactory(new PropertyValueFactory<>("id"));
         imageColumn.setCellValueFactory(new PropertyValueFactory<>("image"));
         nameColumn.setCellValueFactory(new PropertyValueFactory<>("name"));
@@ -48,7 +48,7 @@ public class HomeAdminController {
         stockColumn.setCellValueFactory(new PropertyValueFactory<>("stock"));
         priceColumn.setCellValueFactory(new PropertyValueFactory<>("price"));
 
-
+        // Căn giữa nội dung các cột
         centerColumnData(idColumn);
         centerColumnData(stockColumn);
         centerColumnData(nameColumn);
@@ -56,6 +56,7 @@ public class HomeAdminController {
         centerColumnData(quantityColumn);
         centerColumnData(priceColumn);
 
+        // Định dạng cột ảnh
         imageColumn.setCellFactory(column -> new TableCell<>() {
             private final ImageView imageView = new ImageView();
 
@@ -74,9 +75,7 @@ public class HomeAdminController {
             }
         });
 
-
         loadProducts();
-
         productTable.setItems(productList);
     }
 
@@ -119,16 +118,16 @@ public class HomeAdminController {
                         setText(null);
                     } else {
                         setText(item.toString());
-                        setAlignment(Pos.CENTER); //
+                        setAlignment(Pos.CENTER);
                     }
                 }
             };
             return cell;
         });
     }
+
     @FXML
     private void showTableView() {
         productTable.setVisible(true);
     }
-
 }

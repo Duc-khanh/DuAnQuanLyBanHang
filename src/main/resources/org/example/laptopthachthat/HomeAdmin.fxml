@@ -89,7 +89,7 @@
                 <TableView fx:id="productTable" layoutX="8.0" layoutY="-2.0" prefHeight="677.0" prefWidth="1080.0" visible="false">
                     <columns>
                         <TableColumn fx:id="idColumn" prefWidth="89.0" text="ID" />
-                        <TableColumn fx:id="imageColumn" prefWidth="149.0" text="Image" />
+                        <TableColumn fx:id="imageColumn" text="Image" />
                         <TableColumn fx:id="nameColumn" prefWidth="203.0" text="Name" />
                         <TableColumn fx:id="describeColumn" prefWidth="219.0" text="Describe" />
                         <TableColumn fx:id="quantityColumn" prefWidth="151.0" text="Quantity" />

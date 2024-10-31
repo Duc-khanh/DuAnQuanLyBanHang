@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane prefHeight="513.0" prefWidth="702.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.laptopthachthat.Admin.HomeAdminController">
+
+    <children>
+        <TableView fx:id="userTable" layoutY="-1.0" prefHeight="513.0" prefWidth="702.0">
+            <columns>
+                <TableColumn fx:id="idColumn" prefWidth="66.0" text="ID" />
+                <TableColumn fx:id="RoleColumn" prefWidth="72.0" text="Role" />
+                <TableColumn fx:id="UsernameColumn" prefWidth="92.0" text="UserName" />
+                <TableColumn fx:id="PasswordColumn" prefWidth="111.0" text="Password" />
+                <TableColumn fx:id="PhoneNumberColumn" minWidth="20.0" prefWidth="111.0" text="PhoneNumber" />
+                <TableColumn fx:id="StockColumn" minWidth="0.0" prefWidth="106.0" text=" Address" />
+                <TableColumn fx:id="AddressColumn" minWidth="0.0" prefWidth="143.0" text="State" />
+            </columns>
+        </TableView>
+    </children>
+
+</AnchorPane>
