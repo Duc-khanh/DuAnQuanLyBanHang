@@ -89,9 +89,59 @@ public class HomeAdminController {
         } catch (SQLException e) {
             e.printStackTrace();
         }
+
     }
+    @FXML
+    public void addProduct(ActionEvent event) {
+        // Lấy dữ liệu từ các trường nhập liệu
+        String productName = "Tên sản phẩm";  // Thay bằng giá trị từ giao diện người dùng
+        String description = "Mô tả sản phẩm";  // Thay bằng giá trị từ giao diện người dùng
+        int quantity = 10; // Thay bằng giá trị từ giao diện người dùng
+        double price = 100.0; // Thay bằng giá trị từ giao diện người dùng
+        boolean stock = true; // Thay bằng giá trị từ giao diện người dùng
+        String imageURL = "URL hình ảnh"; // Thay bằng giá trị từ giao diện người dùng
+
+        String query = "INSERT INTO Products (productName, description, quality, price, stock, image) VALUES (?, ?, ?, ?, ?, ?)";
+
+        try (Connection connection = ConectionJDBC.getConnection();
+             PreparedStatement statement = connection.prepareStatement(query)) {
+
+            // Thiết lập giá trị cho các tham số
+            statement.setString(1, productName);
+            statement.setString(2, description);
+            statement.setInt(3, quantity);
+            statement.setDouble(4, price);
+            statement.setBoolean(5, stock);
+            statement.setString(6, imageURL);
+
+            int rowsInserted = statement.executeUpdate();
+            if (rowsInserted > 0) {
+                System.out.println("Sản phẩm đã được thêm thành công vào cơ sở dữ liệu.");
+
+                // Cập nhật danh sách sản phẩm
+                Image image = new Image(imageURL);
+                ImageView imageView = new ImageView(image);
+                imageView.setFitHeight(145);
+                imageView.setFitWidth(150);
+
+                Product product = new Product(0, productName, price, quantity, description, stock, imageView); // Giả sử ID tự động tạo
+                productList.add(product); // Cập nhật danh sách hiển thị
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
     public void BackToSignin(ActionEvent event) throws IOException {
         Parent root = FXMLLoader.load(Main.class.getResource("Login.fxml"));
+        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        Scene scene = new Scene(root);
+        stage.setTitle("Sign up");
+        stage.setScene(scene);
+        stage.show();
+    }public void ToAddProduct(ActionEvent event) throws IOException {
+        Parent root = FXMLLoader.load(Main.class.getResource("AddProduct.fxml"));
         Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         Scene scene = new Scene(root);
         stage.setTitle("Sign up");
