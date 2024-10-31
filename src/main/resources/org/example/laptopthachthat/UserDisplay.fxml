@@ -55,7 +55,7 @@
                         <Font name="Wingdings 3" size="24.0" />
                     </font>
                 </Label>
-            <Button layoutX="100.0" layoutY="662.0" mnemonicParsing="false" onAction="#BackToSignin" prefHeight="45.0" prefWidth="114.0" styleClass="search-button" stylesheets="@login.css" text="Log out" />
+                <Button layoutX="100.0" layoutY="662.0" mnemonicParsing="false" onAction="#BackToSignin" prefHeight="45.0" prefWidth="114.0" styleClass="search-button" stylesheets="@login.css" text="Log out" />
             </children>
         </AnchorPane>
 
