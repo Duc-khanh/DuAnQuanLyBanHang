@@ -8,11 +8,11 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
+import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
 import org.example.laptopthachthat.ConectionJDBC;
 import org.example.laptopthachthat.Admin.Product;
@@ -23,6 +23,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.Optional;
 
 public class HomeAdminController {
     @FXML
@@ -32,7 +33,7 @@ public class HomeAdminController {
     @FXML
     private TableColumn<Product, Boolean> stockColumn;
     @FXML
-    private TableColumn<Product, Image> imageColumn;
+    private TableColumn<Product, ImageView> imageColumn;
     @FXML
     private TableColumn<Product, String> nameColumn;
     @FXML
@@ -41,6 +42,8 @@ public class HomeAdminController {
     private TableColumn<Product, Integer> quantityColumn;
     @FXML
     private TableColumn<Product, Double> priceColumn;
+    @FXML
+    private Label showAdd;
 
     private ObservableList<Product> productList = FXCollections.observableArrayList();
 
@@ -65,7 +68,7 @@ public class HomeAdminController {
     private void loadProducts() {
         String query = "SELECT productID, stock, image, productName, description, quality, price FROM Products";
 
-        try (Connection connection = ConectionJDBC.getConnection(); // Sử dụng kết nối từ lớp khác
+        try (Connection connection = ConectionJDBC.getConnection();
              PreparedStatement statement = connection.prepareStatement(query);
              ResultSet resultSet = statement.executeQuery()) {
 
@@ -83,30 +86,21 @@ public class HomeAdminController {
                 imageView.setFitHeight(145);
                 imageView.setFitWidth(150);
 
-                Product product = new Product(productID,productName,price,quality,description,stock,imageView);
+                Product product = new Product(productID, productName, price, quality, description, stock, imageView);
                 productList.add(product);
             }
         } catch (SQLException e) {
             e.printStackTrace();
         }
-
     }
-    @FXML
-    public void addProduct(ActionEvent event) {
-        // Lấy dữ liệu từ các trường nhập liệu
-        String productName = "Tên sản phẩm";  // Thay bằng giá trị từ giao diện người dùng
-        String description = "Mô tả sản phẩm";  // Thay bằng giá trị từ giao diện người dùng
-        int quantity = 10; // Thay bằng giá trị từ giao diện người dùng
-        double price = 100.0; // Thay bằng giá trị từ giao diện người dùng
-        boolean stock = true; // Thay bằng giá trị từ giao diện người dùng
-        String imageURL = "URL hình ảnh"; // Thay bằng giá trị từ giao diện người dùng
 
+    @FXML
+    public void addProduct(String productName, double price, int quantity, String description, boolean stock, String imageURL) {
         String query = "INSERT INTO Products (productName, description, quality, price, stock, image) VALUES (?, ?, ?, ?, ?, ?)";
 
         try (Connection connection = ConectionJDBC.getConnection();
              PreparedStatement statement = connection.prepareStatement(query)) {
 
-            // Thiết lập giá trị cho các tham số
             statement.setString(1, productName);
             statement.setString(2, description);
             statement.setInt(3, quantity);
@@ -124,7 +118,7 @@ public class HomeAdminController {
                 imageView.setFitHeight(145);
                 imageView.setFitWidth(150);
 
-                Product product = new Product(0, productName, price, quantity, description, stock, imageView); // Giả sử ID tự động tạo
+                Product product = new Product(0, productName, price, quantity, description, stock, imageView);
                 productList.add(product); // Cập nhật danh sách hiển thị
             }
 
@@ -133,15 +127,54 @@ public class HomeAdminController {
         }
     }
 
+    public void showDisplayAdd() {
+        Dialog<ButtonType> showAddDialog = new Dialog<>();
+        showAddDialog.setTitle("Add Product");
+
+        // Các trường nhập liệu cho sản phẩm
+        TextField nameField = new TextField();
+        TextField descriptionField = new TextField();
+        TextField quantityField = new TextField();
+        TextField priceField = new TextField();
+        TextField imageURLField = new TextField();
+        CheckBox stockCheckBox = new CheckBox();
+
+        GridPane grid = new GridPane();
+        grid.setHgap(10);
+        grid.setVgap(10);
+        grid.add(new Label("Name"), 0, 0);
+        grid.add(nameField, 1, 0);
+        grid.add(new Label("Description"), 0, 1);
+        grid.add(descriptionField, 1, 1);
+        grid.add(new Label("Quantity"), 0, 2);
+        grid.add(quantityField, 1, 2);
+        grid.add(new Label("Price"), 0, 3);
+        grid.add(priceField, 1, 3);
+        grid.add(new Label("Image URL"), 0, 4);
+        grid.add(imageURLField, 1, 4);
+        grid.add(new Label("In Stock"), 0, 5);
+        grid.add(stockCheckBox, 1, 5);
+
+        showAddDialog.getDialogPane().setContent(grid);
+        showAddDialog.getDialogPane().getButtonTypes().addAll(ButtonType.OK, ButtonType.CANCEL);
+
+        Optional<ButtonType> result = showAddDialog.showAndWait();
+        if (result.isPresent() && result.get() == ButtonType.OK) {
+            // Lấy dữ liệu từ các trường và thêm sản phẩm
+            String productName = nameField.getText();
+            String description = descriptionField.getText();
+            int quantity = Integer.parseInt(quantityField.getText());
+            double price = Double.parseDouble(priceField.getText());
+            boolean stock = stockCheckBox.isSelected();
+            String imageURL = imageURLField.getText();
+
+            // Thêm sản phẩm mới vào cơ sở dữ liệu và hiển thị trên TableView
+            addProduct(productName, price, quantity, description, stock, imageURL);
+        }
+    }
+
     public void BackToSignin(ActionEvent event) throws IOException {
         Parent root = FXMLLoader.load(Main.class.getResource("Login.fxml"));
-        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        Scene scene = new Scene(root);
-        stage.setTitle("Sign up");
-        stage.setScene(scene);
-        stage.show();
-    }public void ToAddProduct(ActionEvent event) throws IOException {
-        Parent root = FXMLLoader.load(Main.class.getResource("AddProduct.fxml"));
         Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         Scene scene = new Scene(root);
         stage.setTitle("Sign up");
