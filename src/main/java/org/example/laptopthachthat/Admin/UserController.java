@@ -55,7 +55,6 @@ public class UserController {
         ResultSet resultSet = null;
 
         try {
-
             connection = ConectionJDBC.getConnection();
             String query = "SELECT * FROM User WHERE role = 'Customer'";
             statement = connection.prepareStatement(query);

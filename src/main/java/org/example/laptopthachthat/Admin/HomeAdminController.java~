@@ -152,7 +152,7 @@ public class HomeAdminController {
 
                     System.out.println("Signed out successfully.");
                 } catch (IOException e) {
-                    System.err.println("Error returning to the login page: " + e.getMessage());
+                    System.err.println("Lỗi khi quay lại trang đăng nhập: " + e.getMessage());
                     e.printStackTrace();
                 }
             } else {

@@ -4,6 +4,7 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
@@ -24,27 +25,24 @@
                         <Font name="SignPainter-HouseScript" size="36.0" />
                     </font>
                 </Label>
-                <ImageView fitHeight="53.0" fitWidth="50.0" layoutX="31.0" layoutY="272.0" onMouseClicked="#showTableView" pickOnBounds="true" preserveRatio="true">
+                <ImageView fitHeight="53.0" fitWidth="50.0" layoutX="31.0" layoutY="272.0" pickOnBounds="true" preserveRatio="true">
                     <image>
                         <Image url="@Image/4439476.png" />
                     </image>
                 </ImageView>
-
-
-
                 <Label layoutX="102.0" layoutY="278.0" prefHeight="37.0" prefWidth="124.0" text="Product">
                     <font>
                         <Font name="Wingdings 3" size="30.0" />
                     </font>
                 </Label>
-                <ImageView fitHeight="41.0" fitWidth="53.0" layoutX="29.0" layoutY="344.0" pickOnBounds="true" preserveRatio="true">
+                <ImageView fitHeight="37.0" fitWidth="38.0" layoutX="36.0" layoutY="426.0" pickOnBounds="true" preserveRatio="true">
                     <image>
                         <Image url="@Image/1144760.png" />
                     </image>
                 </ImageView>
-                <Label layoutX="95.0" layoutY="345.0" prefHeight="37.0" prefWidth="134.0" text="Account">
+                <Label layoutX="105.0" layoutY="425.0" prefHeight="37.0" prefWidth="134.0" text="Account">
                     <font>
-                        <Font name="Wingdings 3" size="36.0" />
+                        <Font name="Wingdings 3" size="24.0" />
                     </font>
                 </Label>
                 <Button layoutX="61.0" layoutY="682.0" mnemonicParsing="false" onAction="#BackToSignin" prefHeight="59.0" prefWidth="190.0" styleClass="search-button" stylesheets="@login.css" text="Log out">
@@ -56,55 +54,59 @@
         </AnchorPane>
 
         <AnchorPane layoutX="1050.0" layoutY="46.0" prefHeight="87.0" prefWidth="368.0">
-         <children>
-            <HBox alignment="CENTER" layoutX="6.0" layoutY="10.0" prefHeight="86.0" prefWidth="281.0" styleClass="my-account" stylesheets="@login.css">
-               <children>
-                  <Label prefHeight="66.0" prefWidth="244.0" text="Delete Product" textFill="#8a7f7f">
-                     <font>
-                        <Font name="Chalkboard SE Regular" size="33.0" />
-                     </font>
-                  </Label>
-               </children>
-            </HBox>
-         </children>
+            <children>
+                <HBox alignment="CENTER" layoutX="11.0" layoutY="17.0" prefHeight="60.0" prefWidth="338.0" styleClass="search-box" stylesheets="@login.css">
+                    <children>
+                        <TextField prefHeight="48.0" prefWidth="238.0" promptText="Type here to search" style="-fx-background-color: transparent;" />
+                        <Button mnemonicParsing="false" prefHeight="46.0" prefWidth="94.0" styleClass="search-button" stylesheets="@login.css" text="Search" />
+                    </children>
+                </HBox>
+            </children>
         </AnchorPane>
 
 
         <AnchorPane layoutX="309.0" layoutY="172.0" prefHeight="610.0" prefWidth="971.0">
             <children>
-                <TableView fx:id="productTable" layoutX="8.0" layoutY="-2.0" prefHeight="677.0" prefWidth="1080.0" visible="false">
+                <TableView fx:id="productTable" layoutX="8.0" layoutY="-2.0" prefHeight="677.0" prefWidth="1080.0">
                     <columns>
-                        <TableColumn fx:id="idColumn" prefWidth="57.0" text="ID" />
-                        <TableColumn fx:id="imageColumn" prefWidth="159.0" text="Image" />
-                        <TableColumn fx:id="nameColumn" prefWidth="156.0" text="Name" />
-                        <TableColumn fx:id="describeColumn" prefWidth="260.0" text="Describe" />
-                        <TableColumn fx:id="quantityColumn" prefWidth="85.0" text="Quantity" />
-                        <TableColumn fx:id="priceColumn" minWidth="20.0" prefWidth="85.0" text="Price" />
-                        <TableColumn fx:id="stockColumn" prefWidth="101.0" text="Stock" />
-                  <TableColumn fx:id="stockColumn1" prefWidth="204.0" text="Actions" />
+                        <TableColumn fx:id="idColumn" prefWidth="89.0" text="ID" />
+                        <TableColumn fx:id="stockColumn" prefWidth="97.0" text="Stock" />
+                        <TableColumn fx:id="imageColumn" prefWidth="149.0" text="Image" />
+                        <TableColumn fx:id="nameColumn" prefWidth="203.0" text="Name" />
+                        <TableColumn fx:id="describeColumn" prefWidth="219.0" text="Describe" />
+                        <TableColumn fx:id="quantityColumn" prefWidth="151.0" text="Quantity" />
+                        <TableColumn fx:id="priceColumn" minWidth="20.0" prefWidth="171.0" text="Price" />
                     </columns>
                 </TableView>
-
             </children>
         </AnchorPane>
         <HBox alignment="CENTER" layoutX="357.0" layoutY="57.0" prefHeight="86.0" prefWidth="232.0" styleClass="my-account" stylesheets="@login.css">
             <children>
-                <Label layoutX="400.0" layoutY="100.0" onMouseClicked="#addProduct" text="Add Product" textFill="#8a7f7f">
+                <Label prefHeight="66.0" prefWidth="194.0" text="My Account" textFill="#8a7f7f">
                     <font>
                         <Font name="Chalkboard SE Regular" size="33.0" />
                     </font>
                 </Label>
-
             </children>
         </HBox>
-        <HBox alignment="CENTER" layoutX="703.0" layoutY="58.0" prefHeight="86.0" prefWidth="281.0" styleClass="my-account" stylesheets="@login.css">
+        <ImageView fitHeight="64.0" fitWidth="63.0" layoutX="591.0" layoutY="69.0" pickOnBounds="true" preserveRatio="true">
+            <image>
+                <Image url="@Image/1144760.png" />
+            </image>
+        </ImageView>
+        <HBox alignment="CENTER" layoutX="703.0" layoutY="58.0" prefHeight="86.0" prefWidth="232.0" styleClass="my-account" stylesheets="@login.css">
             <children>
-                <Label prefHeight="66.0" prefWidth="253.0" text="Update Product" textFill="#8a7f7f">
+                <Label prefHeight="66.0" prefWidth="194.0" text="My Account" textFill="#8a7f7f">
                     <font>
                         <Font name="Chalkboard SE Regular" size="33.0" />
                     </font>
                 </Label>
             </children>
         </HBox>
+        <ImageView fitHeight="65.0" fitWidth="75.0" layoutX="942.0" layoutY="73.0" pickOnBounds="true" preserveRatio="true">
+            <image>
+                <Image url="@Image/3144456.png" />
+            </image>
+        </ImageView>
     </children>
 </AnchorPane>

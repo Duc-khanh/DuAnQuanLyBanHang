@@ -28,7 +28,7 @@
 }
 
 .button-label {
-
+ 
     -fx-padding: 10 20;
     -fx-alignment: center;
     -fx-border-radius: 5;

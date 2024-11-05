@@ -32,8 +32,8 @@ public class SignUpController {
     @FXML
     private TextField address;
 
-    private static final String PHONE_REGEX = "^0\\d{9}$";  // Validates a 10-digit phone number starting with 0
-    private static final String ADDRESS_REGEX = "^(?=.*[A-Za-zÀ-ỹ])[A-Za-zÀ-ỹ0-9\\s]+(?:\\s[A-Za-zÀ-ỹ\\s]+)*$";  // Allows letters, numbers, spaces
+    private static final String PHONE_REGEX = "^0\\d{9}$";
+    private static final String ADDRESS_REGEX = "^(?=.*[A-Za-zÀ-ỹ])[A-Za-zÀ-ỹ0-9\\s]+(?:\\s[A-Za-zÀ-ỹ\\s]+)*$";
 
     public void signUp(ActionEvent actionEvent) throws SQLException {
         String username = this.username.getText().trim();
@@ -102,6 +102,15 @@ public class SignUpController {
         return phoneNumber.matches(PHONE_REGEX);
     }
 
+    @FXML
+    private void validatePhoneNumber() {
+        String phone = phoneNumber.getText().trim();
+        if (!isValidPhoneNumber(phone)) {
+            phoneNumber.setStyle("-fx-border-color: #ff0000;");
+        } else {
+            phoneNumber.setStyle(null);
+        }
+    }
     private boolean isValidAddress(String address) {
         return address.matches(ADDRESS_REGEX);
     }
@@ -113,12 +122,6 @@ public class SignUpController {
         alert.showAndWait();
     }
 
-//    private void changeScene(String fxmlFile) throws IOException {
-//        Parent root = FXMLLoader.load(getClass().getResource(fxmlFile));
-//        Stage stage = (Stage) username.getScene().getWindow();
-//        stage.setScene(new Scene(root));
-//        stage.show();
-//    }
 
     public void showLogin(ActionEvent actionEvent) {
         try {

@@ -24,7 +24,7 @@
                         <Font name="SignPainter-HouseScript" size="36.0" />
                     </font>
                 </Label>
-                <ImageView fitHeight="53.0" fitWidth="50.0" layoutX="31.0" layoutY="272.0" onMouseClicked="#showTableView" pickOnBounds="true" preserveRatio="true">
+                <ImageView fitHeight="53.0" fitWidth="50.0" layoutX="31.0" layoutY="272.0" pickOnBounds="true" preserveRatio="true" onMouseClicked="#showTableView">
                     <image>
                         <Image url="@Image/4439476.png" />
                     </image>
@@ -74,14 +74,13 @@
             <children>
                 <TableView fx:id="productTable" layoutX="8.0" layoutY="-2.0" prefHeight="677.0" prefWidth="1080.0" visible="false">
                     <columns>
-                        <TableColumn fx:id="idColumn" prefWidth="57.0" text="ID" />
-                        <TableColumn fx:id="imageColumn" prefWidth="159.0" text="Image" />
-                        <TableColumn fx:id="nameColumn" prefWidth="156.0" text="Name" />
-                        <TableColumn fx:id="describeColumn" prefWidth="260.0" text="Describe" />
-                        <TableColumn fx:id="quantityColumn" prefWidth="85.0" text="Quantity" />
-                        <TableColumn fx:id="priceColumn" minWidth="20.0" prefWidth="85.0" text="Price" />
-                        <TableColumn fx:id="stockColumn" prefWidth="101.0" text="Stock" />
-                  <TableColumn fx:id="stockColumn1" prefWidth="204.0" text="Actions" />
+                        <TableColumn fx:id="idColumn" prefWidth="89.0" text="ID" />
+                        <TableColumn fx:id="imageColumn" text="Image" />
+                        <TableColumn fx:id="nameColumn" prefWidth="203.0" text="Name" />
+                        <TableColumn fx:id="describeColumn" prefWidth="219.0" text="Describe" />
+                        <TableColumn fx:id="quantityColumn" prefWidth="151.0" text="Quantity" />
+                        <TableColumn fx:id="priceColumn" minWidth="20.0" prefWidth="171.0" text="Price" />
+                        <TableColumn fx:id="stockColumn" prefWidth="97.0" text="Stock" />
                     </columns>
                 </TableView>
 
@@ -89,7 +88,7 @@
         </AnchorPane>
         <HBox alignment="CENTER" layoutX="357.0" layoutY="57.0" prefHeight="86.0" prefWidth="232.0" styleClass="my-account" stylesheets="@login.css">
             <children>
-                <Label layoutX="400.0" layoutY="100.0" onMouseClicked="#addProduct" text="Add Product" textFill="#8a7f7f">
+                <Label layoutX="400.0" layoutY="100.0" text="Add Product" onMouseClicked="#addProduct" >
                     <font>
                         <Font name="Chalkboard SE Regular" size="33.0" />
                     </font>
