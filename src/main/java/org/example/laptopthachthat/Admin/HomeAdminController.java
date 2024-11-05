@@ -130,7 +130,7 @@ public class HomeAdminController {
             return false;
         }
     }
-
+//sadasdad
 
     @FXML
     public void addProduct(String productName, double price, int quantity, String description, boolean stock, String imageURL) {
