@@ -5,6 +5,7 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -65,6 +66,13 @@ public class HomeAdminController {
         quantityColumn.setCellValueFactory(new PropertyValueFactory<>("quantity"));
         priceColumn.setCellValueFactory(new PropertyValueFactory<>("price"));
 
+        centerColumnData(idColumn);
+        centerColumnData(stockColumn);
+        centerColumnData(nameColumn);
+        centerColumnData(describeColumn);
+        centerColumnData(quantityColumn);
+        centerColumnData(priceColumn);
+
         loadProducts();
 
 
@@ -119,6 +127,20 @@ public class HomeAdminController {
         } catch (SQLException e) {
             e.printStackTrace();
         }
+    }
+    private <T> void centerColumnData(TableColumn<Product, T> column) {
+        column.setCellFactory(tc -> new TableCell<>() {
+            @Override
+            protected void updateItem(T item, boolean empty) {
+                super.updateItem(item, empty);
+                if (empty || item == null) {
+                    setText(null);
+                } else {
+                    setText(item.toString());
+                    setAlignment(Pos.CENTER);
+                }
+            }
+        });
     }
 
     // Phương thức kiểm tra tính hợp lệ của URL
@@ -229,17 +251,30 @@ public class HomeAdminController {
         String query = "DELETE FROM Products WHERE productID = ?";
 
     }
+    @FXML
+    private void BackToSignin(ActionEvent event) {
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+        alert.setTitle("Log out");
+        alert.setHeaderText("Are you sure you want to log out?");
 
-    public void BackToSignin(ActionEvent event) throws IOException {
+        alert.showAndWait().ifPresent(response -> {
+            if (response == ButtonType.OK) {
+                try {
+                    Parent root = FXMLLoader.load(getClass().getResource("/org/example/laptopthachthat/Login.fxml"));
+                    Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+                    stage.setScene(new Scene(root));
+                    stage.show();
 
-        Parent root = FXMLLoader.load(Main.class.getResource("Login.fxml"));
-        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        Scene scene = new Scene(root);
-        stage.setTitle("Sign up");
-        stage.setScene(scene);
-        stage.show();
+                    System.out.println("Signed out successfully.");
+                } catch (IOException e) {
+                    System.err.println("Error returning to the login page: " + e.getMessage());
+                    e.printStackTrace();
+                }
+            } else {
+                System.out.println("Cancel logout.");
+            }
+        });
     }
-
     public void DeleteProduct(ActionEvent actionEvent) {
     }
 
