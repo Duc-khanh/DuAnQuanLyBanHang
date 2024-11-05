@@ -14,11 +14,14 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
-import org.example.laptopthachthat.ConectionJDBC;
 import org.example.laptopthachthat.Admin.Product;
+import org.example.laptopthachthat.ConectionJDBC;
 import org.example.laptopthachthat.Main;
 
+import java.io.BufferedWriter;
+import java.io.FileWriter;
 import java.io.IOException;
+import java.net.URL;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -43,7 +46,11 @@ public class HomeAdminController {
     @FXML
     private TableColumn<Product, Double> priceColumn;
     @FXML
-    private Label showAdd;
+    private Button AddButton;
+    @FXML
+    private Button DeleteButton;
+    @FXML
+    private Button UpdateButton;
 
     private ObservableList<Product> productList = FXCollections.observableArrayList();
 
@@ -58,14 +65,15 @@ public class HomeAdminController {
         quantityColumn.setCellValueFactory(new PropertyValueFactory<>("quantity"));
         priceColumn.setCellValueFactory(new PropertyValueFactory<>("price"));
 
-        // Load products from the database
         loadProducts();
 
-        // Set the items for the TableView
+
+
         productTable.setItems(productList);
     }
 
     private void loadProducts() {
+        productList.clear();
         String query = "SELECT productID, stock, image, productName, description, quality, price FROM Products";
 
         try (Connection connection = ConectionJDBC.getConnection();
@@ -76,7 +84,25 @@ public class HomeAdminController {
                 int productID = resultSet.getInt("productID");
                 boolean stock = resultSet.getBoolean("stock");
                 String imageURL = resultSet.getString("image");
-                Image image = new Image(imageURL);
+
+                Image image;
+                try {
+                    if (imageURL == null || imageURL.isEmpty() || !isValidURL(imageURL)) {
+                        throw new IllegalArgumentException("Invalid image URL for product ID: " + productID);
+                    }
+                    image = new Image(imageURL, true);
+                } catch (Exception e) {
+                    System.out.println("Invalid image URL for product ID: " + productID + ". Using default image.");
+                    URL defaultImageUrl = getClass().getResource("/path/to/default/image.png");
+                    if (defaultImageUrl != null) {
+                        image = new Image(defaultImageUrl.toExternalForm());
+                    } else {
+                        System.err.println("Default image not found at the specified path.");
+
+                        image = new Image("file:/absolute/path/to/local/image.png");
+                    }
+                }
+
                 String productName = resultSet.getString("productName");
                 String description = resultSet.getString("description");
                 int quality = resultSet.getInt("quality");
@@ -89,10 +115,22 @@ public class HomeAdminController {
                 Product product = new Product(productID, productName, price, quality, description, stock, imageView);
                 productList.add(product);
             }
+
         } catch (SQLException e) {
             e.printStackTrace();
         }
     }
+
+    // Phương thức kiểm tra tính hợp lệ của URL
+    private boolean isValidURL(String url) {
+        try {
+            new URL(url).toURI();
+            return true;
+        } catch (Exception e) {
+            return false;
+        }
+    }
+
 
     @FXML
     public void addProduct(String productName, double price, int quantity, String description, boolean stock, String imageURL) {
@@ -110,16 +148,9 @@ public class HomeAdminController {
 
             int rowsInserted = statement.executeUpdate();
             if (rowsInserted > 0) {
-                System.out.println("Sản phẩm đã được thêm thành công vào cơ sở dữ liệu.");
+                System.out.println("The product has been successfully added to the database.");
 
-                // Cập nhật danh sách sản phẩm
-                Image image = new Image(imageURL);
-                ImageView imageView = new ImageView(image);
-                imageView.setFitHeight(145);
-                imageView.setFitWidth(150);
-
-                Product product = new Product(0, productName, price, quantity, description, stock, imageView);
-                productList.add(product); // Cập nhật danh sách hiển thị
+                loadProducts();
             }
 
         } catch (SQLException e) {
@@ -127,11 +158,11 @@ public class HomeAdminController {
         }
     }
 
+
     public void showDisplayAdd() {
         Dialog<ButtonType> showAddDialog = new Dialog<>();
         showAddDialog.setTitle("Add Product");
 
-        // Các trường nhập liệu cho sản phẩm
         TextField nameField = new TextField();
         TextField descriptionField = new TextField();
         TextField quantityField = new TextField();
@@ -160,25 +191,58 @@ public class HomeAdminController {
 
         Optional<ButtonType> result = showAddDialog.showAndWait();
         if (result.isPresent() && result.get() == ButtonType.OK) {
-            // Lấy dữ liệu từ các trường và thêm sản phẩm
             String productName = nameField.getText();
             String description = descriptionField.getText();
-            int quantity = Integer.parseInt(quantityField.getText());
-            double price = Double.parseDouble(priceField.getText());
-            boolean stock = stockCheckBox.isSelected();
+            String quantityText = quantityField.getText();
+            String priceText = priceField.getText();
             String imageURL = imageURLField.getText();
+            boolean stock = stockCheckBox.isSelected();
 
-            // Thêm sản phẩm mới vào cơ sở dữ liệu và hiển thị trên TableView
-            addProduct(productName, price, quantity, description, stock, imageURL);
+
+            if (productName.isEmpty() || description.isEmpty() || quantityText.isEmpty() || priceText.isEmpty() || imageURL.isEmpty()) {
+                showError("Incomplete Information", "Please fill in all fields before adding the product.");
+                return;
+            }
+
+            try {
+                int quantity = Integer.parseInt(quantityText);
+                double price = Double.parseDouble(priceText);
+
+                addProduct(productName, price, quantity, description, stock, imageURL);
+            } catch (NumberFormatException e) {
+                showError("Invalid Data", "Please enter valid numbers for quantity and price.");
+            }
         }
     }
 
+
+    private void showError(String title, String message) {
+        Alert alert = new Alert(Alert.AlertType.ERROR);
+        alert.setTitle(title);
+        alert.setHeaderText(null);
+        alert.setContentText(message);
+        alert.showAndWait();
+    }
+
+    private void DeleteProduct(int productID, String productName, double price, int quantity, String description, boolean stock, ImageView imageView) {
+
+        String query = "DELETE FROM Products WHERE productID = ?";
+
+    }
+
     public void BackToSignin(ActionEvent event) throws IOException {
+
         Parent root = FXMLLoader.load(Main.class.getResource("Login.fxml"));
         Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         Scene scene = new Scene(root);
         stage.setTitle("Sign up");
         stage.setScene(scene);
         stage.show();
+    }
+
+    public void DeleteProduct(ActionEvent actionEvent) {
+    }
+
+    public void UpdateProduct(ActionEvent actionEvent) {
     }
 }
