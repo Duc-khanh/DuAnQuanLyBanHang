@@ -1,0 +1,91 @@
+package org.example.laptopthachthat.Admin;
+
+import javafx.event.ActionEvent;
+import javafx.fxml.FXML;
+import javafx.scene.control.Alert;
+import javafx.scene.control.ButtonBar;
+import javafx.scene.control.ButtonType;
+import javafx.scene.control.TextInputDialog;
+import org.example.laptopthachthat.ConectionJDBC;
+
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
+import java.util.Optional;
+
+public class DeleteProduct {
+
+    @FXML
+    public void deleteProduct(ActionEvent actionEvent) {
+        // Hiển thị hộp thoại nhập ID sản phẩm
+        TextInputDialog inputDialog = new TextInputDialog();
+        inputDialog.setTitle("Change product status");
+        inputDialog.setHeaderText("Enter the product ID for which you want to change the status:");
+        inputDialog.setContentText("Product ID:");
+
+        Optional<String> result = inputDialog.showAndWait();
+        if (result.isPresent()) {
+            String input = result.get().trim();
+
+            try {
+                // Chuyển đổi input thành số nguyên
+                int productId = Integer.parseInt(input);
+
+                // Hiển thị hộp thoại xác nhận chọn trạng thái
+                Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+                alert.setTitle("Change product status");
+                alert.setHeaderText("Select a new status for the product with ID: " + productId);
+
+                ButtonType availableButton = new ButtonType("Còn hàng");
+                ButtonType outOfStockButton = new ButtonType("Hết hàng");
+                ButtonType cancelButton = new ButtonType("Hủy", ButtonBar.ButtonData.CANCEL_CLOSE);
+
+                alert.getButtonTypes().setAll(availableButton, outOfStockButton, cancelButton);
+
+                // Xử lý kết quả từ hộp thoại trạng thái
+                Optional<ButtonType> statusResult = alert.showAndWait();
+                if (statusResult.isPresent() && statusResult.get() != cancelButton) {
+                    boolean newStockStatus = (statusResult.get() == availableButton);
+                    // Cập nhật trạng thái sản phẩm
+                    updateProductStatus(productId, newStockStatus);
+                }
+            } catch (NumberFormatException e) {
+                // Nếu ID không hợp lệ, hiển thị thông báo lỗi
+                showError("Invalid ID", "Please enter a valid product ID (integer).");
+            }
+        }
+    }
+
+    // Phương thức hiển thị thông báo lỗi
+    private void showError(String title, String message) {
+        Alert alert = new Alert(Alert.AlertType.ERROR);
+        alert.setTitle(title);
+        alert.setHeaderText(null);
+        alert.setContentText(message);
+        alert.showAndWait();
+    }
+
+    // Phương thức cập nhật trạng thái sản phẩm trong cơ sở dữ liệu
+    private void updateProductStatus(int productId, boolean newStockStatus) {
+        String query = "UPDATE Products SET stock = ? WHERE productID = ?";
+
+        try (Connection connection = ConectionJDBC.getConnection();
+             PreparedStatement statement = connection.prepareStatement(query)) {
+
+            // Đặt giá trị trạng thái mới và ID sản phẩm vào câu lệnh SQL
+            statement.setBoolean(1, newStockStatus);
+            statement.setInt(2, productId);
+
+            // Thực thi câu lệnh cập nhật
+            int rowsUpdated = statement.executeUpdate();
+            if (rowsUpdated > 0) {
+                System.out.println("Product status has been updated.");
+            } else {
+                System.out.println("No product found with ID: " + productId);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+            showError("Database Error", "Failed to update the product status.");
+        }
+    }
+}

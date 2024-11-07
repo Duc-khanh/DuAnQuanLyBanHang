@@ -106,9 +106,7 @@ public class LoginController {
         }
     }
 
-    public void switchToDisplayRegister(ActionEvent event) throws IOException {
 
-    }
 
     public void showSignUp(ActionEvent event) throws IOException {
 
@@ -127,6 +125,5 @@ public class LoginController {
         alert.showAndWait();
     }
 
-    public void TextLogin(ActionEvent actionEvent) {
-    }
+
 }

@@ -11,7 +11,6 @@ public class Product {
     private Boolean stock;
     private ImageView image;
 
-
     public Product(int id, String name, double price, int quantity, String describe, Boolean stock, ImageView image) {
         this.id = id;
         this.name = name;
@@ -78,4 +77,15 @@ public class Product {
         this.image = image;
     }
 
+    public boolean isAvailable() {
+        return stock != null && stock;
+    }
+
+    public void setAvailable(boolean available) {
+        this.stock = available;
+    }
+
+    public boolean isStock() {
+        return stock != null && stock;
+    }
 }
