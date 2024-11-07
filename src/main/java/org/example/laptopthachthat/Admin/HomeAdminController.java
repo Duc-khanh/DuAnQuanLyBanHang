@@ -15,8 +15,12 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
+import org.example.laptopthachthat.Admin.Product;
 import org.example.laptopthachthat.ConectionJDBC;
+import org.example.laptopthachthat.Main;
 
+import java.io.BufferedWriter;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.Connection;
@@ -53,6 +57,7 @@ public class HomeAdminController {
 
     @FXML
     public void initialize() {
+        // Set up the columns to map correctly with the Product class properties
         idColumn.setCellValueFactory(new PropertyValueFactory<>("id"));
         stockColumn.setCellValueFactory(new PropertyValueFactory<>("stock"));
         imageColumn.setCellValueFactory(new PropertyValueFactory<>("image"));
@@ -71,15 +76,19 @@ public class HomeAdminController {
         productTable.getStylesheets().add(getClass().getResource("/org/example/laptopthachthat/product.css").toExternalForm());
 
         loadProducts();
+
+
+
         productTable.setItems(productList);
     }
-
 
     private void loadProducts() {
         productList.clear();
         String query = "SELECT productID, stock, image, productName, description, quality, price FROM Products";
 
-        try (Connection connection = ConectionJDBC.getConnection(); PreparedStatement statement = connection.prepareStatement(query); ResultSet resultSet = statement.executeQuery()) {
+        try (Connection connection = ConectionJDBC.getConnection();
+             PreparedStatement statement = connection.prepareStatement(query);
+             ResultSet resultSet = statement.executeQuery()) {
 
             while (resultSet.next()) {
                 int productID = resultSet.getInt("productID");
@@ -95,7 +104,13 @@ public class HomeAdminController {
                 } catch (Exception e) {
                     System.out.println("Invalid image URL for product ID: " + productID + ". Using default image.");
                     URL defaultImageUrl = getClass().getResource("/path/to/default/image.png");
-                    image = (defaultImageUrl != null) ? new Image(defaultImageUrl.toExternalForm()) : new Image("file:/absolute/path/to/local/image.png");
+                    if (defaultImageUrl != null) {
+                        image = new Image(defaultImageUrl.toExternalForm());
+                    } else {
+                        System.err.println("Default image not found at the specified path.");
+
+                        image = new Image("file:/absolute/path/to/local/image.png");
+                    }
                 }
 
                 String productName = resultSet.getString("productName");
@@ -115,8 +130,22 @@ public class HomeAdminController {
             e.printStackTrace();
         }
     }
+    private <T> void centerColumnData(TableColumn<Product, T> column) {
+        column.setCellFactory(tc -> new TableCell<>() {
+            @Override
+            protected void updateItem(T item, boolean empty) {
+                super.updateItem(item, empty);
+                if (empty || item == null) {
+                    setText(null);
+                } else {
+                    setText(item.toString());
+                    setAlignment(Pos.CENTER);
+                }
+            }
+        });
+    }
 
-
+    // Phương thức kiểm tra tính hợp lệ của URL
     private boolean isValidURL(String url) {
         try {
             new URL(url).toURI();
@@ -125,12 +154,14 @@ public class HomeAdminController {
             return false;
         }
     }
+//sadasdad
 
     @FXML
     public void addProduct(String productName, double price, int quantity, String description, boolean stock, String imageURL) {
         String query = "INSERT INTO Products (productName, description, quality, price, stock, image) VALUES (?, ?, ?, ?, ?, ?)";
 
-        try (Connection connection = ConectionJDBC.getConnection(); PreparedStatement statement = connection.prepareStatement(query)) {
+        try (Connection connection = ConectionJDBC.getConnection();
+             PreparedStatement statement = connection.prepareStatement(query)) {
 
             statement.setString(1, productName);
             statement.setString(2, description);
@@ -141,7 +172,8 @@ public class HomeAdminController {
 
             int rowsInserted = statement.executeUpdate();
             if (rowsInserted > 0) {
-                System.out.println("The product has been added to the database.");
+                System.out.println("The product has been successfully added to the database.");
+
                 loadProducts();
             }
 
@@ -150,9 +182,10 @@ public class HomeAdminController {
         }
     }
 
+
     public void showDisplayAdd() {
         Dialog<ButtonType> showAddDialog = new Dialog<>();
-        showAddDialog.setTitle("More Products");
+        showAddDialog.setTitle("Add Product");
 
         TextField nameField = new TextField();
         TextField descriptionField = new TextField();
@@ -164,17 +197,17 @@ public class HomeAdminController {
         GridPane grid = new GridPane();
         grid.setHgap(10);
         grid.setVgap(10);
-        grid.add(new Label("Tên sản phẩm"), 0, 0);
+        grid.add(new Label("Name"), 0, 0);
         grid.add(nameField, 1, 0);
-        grid.add(new Label("Mô tả"), 0, 1);
+        grid.add(new Label("Description"), 0, 1);
         grid.add(descriptionField, 1, 1);
-        grid.add(new Label("Số lượng"), 0, 2);
+        grid.add(new Label("Quantity"), 0, 2);
         grid.add(quantityField, 1, 2);
-        grid.add(new Label("Giá"), 0, 3);
+        grid.add(new Label("Price"), 0, 3);
         grid.add(priceField, 1, 3);
-        grid.add(new Label("Đường dẫn hình ảnh"), 0, 4);
+        grid.add(new Label("Image URL"), 0, 4);
         grid.add(imageURLField, 1, 4);
-        grid.add(new Label("Còn hàng"), 0, 5);
+        grid.add(new Label("In Stock"), 0, 5);
         grid.add(stockCheckBox, 1, 5);
 
         showAddDialog.getDialogPane().setContent(grid);
@@ -189,20 +222,23 @@ public class HomeAdminController {
             String imageURL = imageURLField.getText();
             boolean stock = stockCheckBox.isSelected();
 
+
             if (productName.isEmpty() || description.isEmpty() || quantityText.isEmpty() || priceText.isEmpty() || imageURL.isEmpty()) {
-                showError("Information is incomplete", "Please fill in all information before adding products.");
+                showError("Incomplete Information", "Please fill in all fields before adding the product.");
                 return;
             }
 
             try {
                 int quantity = Integer.parseInt(quantityText);
                 double price = Double.parseDouble(priceText);
+
                 addProduct(productName, price, quantity, description, stock, imageURL);
             } catch (NumberFormatException e) {
-                showError("Invalid data", "Please enter a valid number for quantity and price.");
+                showError("Invalid Data", "Please enter valid numbers for quantity and price.");
             }
         }
     }
+
 
     private void showError(String title, String message) {
         Alert alert = new Alert(Alert.AlertType.ERROR);
@@ -374,5 +410,10 @@ public class HomeAdminController {
                 System.out.println("Cancel logout.");
             }
         });
+    }
+    public void DeleteProduct(ActionEvent actionEvent) {
+    }
+
+    public void UpdateProduct(ActionEvent actionEvent) {
     }
 }

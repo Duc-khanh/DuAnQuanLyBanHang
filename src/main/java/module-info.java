@@ -14,4 +14,8 @@ module org.example.laptopthachthat {
     exports org.example.laptopthachthat.Sign;
     exports org.example.laptopthachthat.Admin;
     opens org.example.laptopthachthat.Admin to javafx.fxml;
+    exports User;
+    opens User to javafx.fxml;
+    exports;
+    opens to
 }

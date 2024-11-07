@@ -26,6 +26,9 @@
     -fx-background-color: #D3D3D3;
     -fx-background-radius: 30;
 }
+.VBox{
+    -fx-background-color: linear-gradient(to bottom left ,#00BFFF,#ADD8E6);
+}
 
 .button-label {
 
