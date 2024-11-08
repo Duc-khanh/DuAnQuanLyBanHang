@@ -10,9 +10,6 @@ import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
 public class AddProductController {
-
-    @FXML
-    private TextField idField;
     @FXML
     private TextField nameField;
     @FXML

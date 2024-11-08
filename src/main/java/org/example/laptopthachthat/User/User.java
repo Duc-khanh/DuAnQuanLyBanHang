@@ -1,4 +1,4 @@
-package org.example.laptopthachthat.Admin;
+package org.example.laptopthachthat.User;
 
 public class User {
     private int id;
@@ -9,6 +9,7 @@ public class User {
     private String phoneNumber;
     private String state;
 
+
     public User(int id, String role, String username, int password, String address, String phoneNumber, String state) {
         this.id = id;
         this.role = role;
@@ -18,6 +19,7 @@ public class User {
         this.phoneNumber = phoneNumber;
         this.state = state;
     }
+    public User(){}
 
     public int getId() {
         return id;

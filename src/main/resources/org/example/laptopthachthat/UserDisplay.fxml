@@ -11,9 +11,9 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="854.0" prefWidth="1560.0" style="-fx-background-color: #eceff1;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.laptopthachthat.Admin.HomeAdminController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="854.0" prefWidth="1560.0" style="-fx-background-color: #eceff1;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.laptopthachthat.User.UserController">
     <children>
-        <AnchorPane layoutX="0" layoutY="0" prefHeight="866.0" prefWidth="320.0" styleClass="vbox_background_center" stylesheets="@login.css">
+        <AnchorPane prefHeight="866.0" prefWidth="320.0" styleClass="vbox_background_center" stylesheets="@login.css">
             <children>
                 <ImageView fitHeight="204.0" fitWidth="228.0" layoutX="55.0" layoutY="-5.0" pickOnBounds="true" preserveRatio="true">
                     <image>
@@ -30,16 +30,16 @@
                         <Image url="@Image/4439476.png" />
                     </image>
                 </ImageView>
-                <Label layoutX="102.0" layoutY="278.0" prefHeight="37.0" prefWidth="124.0" text="Product">
-                    <font>
-                        <Font name="Wingdings 3" size="30.0" />
-                    </font>
-                </Label>
                 <Button layoutX="61.0" layoutY="742.0" mnemonicParsing="false" onAction="#BackToSignin" prefHeight="59.0" prefWidth="190.0" styleClass="search-button" stylesheets="@login.css" text="Log out">
                     <font>
                         <Font size="24.0" />
                     </font>
                 </Button>
+            <Button fx:id="Product" layoutX="83.0" layoutY="265.0" mnemonicParsing="false" onAction="#showProduct" prefHeight="42.0" prefWidth="154.0" style="-fx-background-color: transprerant;" styleClass="my-account" stylesheets="@login.css" text="Product">
+               <font>
+                  <Font size="33.0" />
+               </font>
+            </Button>
             </children>
         </AnchorPane>
 

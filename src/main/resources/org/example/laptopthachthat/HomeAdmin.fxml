@@ -9,9 +9,9 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="854.0" prefWidth="1418.0" style="-fx-background-color: #eceff1;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.laptopthachthat.Admin.HomeAdminController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="899.0" prefWidth="1440.0" style="-fx-background-color: #eceff1;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.laptopthachthat.Admin.HomeAdminController">
     <children>
-        <AnchorPane layoutX="0" layoutY="0" prefHeight="854.0" prefWidth="320.0" styleClass="vbox_background_center" stylesheets="@login.css">
+        <AnchorPane layoutX="0" layoutY="0" prefHeight="898.0" prefWidth="320.0" styleClass="vbox_background_center" stylesheets="@login.css">
             <children>
                 <ImageView fitHeight="204.0" fitWidth="228.0" layoutX="55.0" layoutY="-5.0" pickOnBounds="true" preserveRatio="true">
                     <image>
@@ -28,36 +28,32 @@
                         <Image url="@Image/4439476.png" />
                     </image>
                 </ImageView>
-                <Label layoutX="102.0" layoutY="278.0" prefHeight="37.0" prefWidth="124.0" text="Product">
-                    <font>
-                        <Font name="Wingdings 3" size="30.0" />
-                    </font>
-                </Label>
                 <ImageView fitHeight="41.0" fitWidth="53.0" layoutX="29.0" layoutY="344.0" pickOnBounds="true" preserveRatio="true">
                     <image>
                         <Image url="@Image/1144760.png" />
                     </image>
                 </ImageView>
-                <Label layoutX="95.0" layoutY="345.0" prefHeight="37.0" prefWidth="134.0" text="Account">
-                    <font>
-                        <Font name="Wingdings 3" size="36.0" />
-                    </font>
-                </Label>
                 <Button layoutX="61.0" layoutY="682.0" mnemonicParsing="false" onAction="#BackToSignin" prefHeight="59.0" prefWidth="190.0" styleClass="search-button" stylesheets="@login.css" text="Log out">
                     <font>
                         <Font size="24.0" />
                     </font>
                 </Button>
+            <Button fx:id="showProfile" layoutX="64.0" layoutY="332.0" mnemonicParsing="false" onAction="#Account" prefHeight="71.0" prefWidth="203.0" style="-fx-background-color: transprerant;" styleClass="my-account" stylesheets="@login.css" text="Account ">
+               <font>
+                  <Font size="37.0" />
+               </font>
+            </Button>
+            <Button fx:id="product" layoutX="63.0" layoutY="264.0" mnemonicParsing="false" onAction="#showProduct" prefHeight="71.0" prefWidth="203.0" style="-fx-background-color: transprerant;" styleClass="my-account" stylesheets="@login.css" text="Product">
+               <font>
+                  <Font size="37.0" />
+               </font>
+            </Button>
             </children>
         </AnchorPane>
 
         <AnchorPane layoutX="1050.0" layoutY="46.0" prefHeight="87.0" prefWidth="368.0">
             <children>
-                <Button fx:id="DeleteButton" layoutX="57.0" layoutY="20.0"
-                        mnemonicParsing="false" onAction="#deleteProduct"
-                        prefHeight="76.0" prefWidth="215.0"
-                        styleClass="my-account" stylesheets="@login.css"
-                        text="Status">
+                <Button fx:id="DeleteButton" layoutX="70.0" layoutY="18.0" mnemonicParsing="false" onAction="#deleteProduct" prefHeight="76.0" prefWidth="215.0" styleClass="my-account" stylesheets="@login.css" text="Status">
                     <font>
                         <Font name="Chalkboard SE Regular" size="30.0" />
                     </font>
@@ -68,7 +64,7 @@
 
         <AnchorPane layoutX="309.0" layoutY="172.0" prefHeight="610.0" prefWidth="971.0">
             <children>
-                <TableView fx:id="productTable" layoutX="8.0" layoutY="-2.0" prefHeight="677.0" prefWidth="1100.0">
+                <TableView fx:id="productTable" layoutX="12.0" layoutY="-2.0" prefHeight="729.0" prefWidth="1112.0">
                     <columns>
                         <TableColumn fx:id="idColumn" prefWidth="63.0" text="ID" />
                         <TableColumn fx:id="imageColumn" prefWidth="162.0" text="Image" />

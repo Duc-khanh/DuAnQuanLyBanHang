@@ -1,4 +1,4 @@
-package User;
+package org.example.laptopthachthat.User;
 
 public class InformationProfile {
     private String username;

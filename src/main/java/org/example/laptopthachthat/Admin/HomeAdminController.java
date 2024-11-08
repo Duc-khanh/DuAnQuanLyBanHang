@@ -46,18 +46,15 @@ public class HomeAdminController {
     private TableColumn<Product, Integer> quantityColumn;
     @FXML
     private TableColumn<Product, Double> priceColumn;
-    @FXML
-    private Button AddButton;
-    @FXML
-    private Button DeleteButton;
-    @FXML
-    private Button UpdateButton;
 
     private ObservableList<Product> productList = FXCollections.observableArrayList();
+    @FXML
+    public void showProduct() {
+        productTable.setVisible(true);
+    }
 
     @FXML
     public void initialize() {
-        // Set up the columns to map correctly with the Product class properties
         idColumn.setCellValueFactory(new PropertyValueFactory<>("id"));
         stockColumn.setCellValueFactory(new PropertyValueFactory<>("stock"));
         imageColumn.setCellValueFactory(new PropertyValueFactory<>("image"));
@@ -76,7 +73,7 @@ public class HomeAdminController {
         productTable.getStylesheets().add(getClass().getResource("/org/example/laptopthachthat/product.css").toExternalForm());
 
         loadProducts();
-
+        productTable.setVisible(false);
 
 
         productTable.setItems(productList);
@@ -415,5 +412,14 @@ public class HomeAdminController {
     }
 
     public void UpdateProduct(ActionEvent actionEvent) {
+    }
+    public void Account(ActionEvent event) throws IOException {
+
+        Parent root = FXMLLoader.load(Main.class.getResource("User.fxml"));
+        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        Scene scene = new Scene(root);
+        stage.setTitle("User Profile");
+        stage.setScene(scene);
+        stage.show();
     }
 }
