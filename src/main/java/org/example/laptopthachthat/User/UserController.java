@@ -12,12 +12,14 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
 import org.example.laptopthachthat.Admin.Product;
 import org.example.laptopthachthat.ConectionJDBC;
+import org.example.laptopthachthat.Main;
 
 import java.io.IOException;
 import java.net.URL;
@@ -43,15 +45,19 @@ public class UserController {
     private TableColumn<Product, Integer> quantityColumn;
     @FXML
     private TableColumn<Product, Double> priceColumn;
+    @FXML
+    private TextField searchField;
 
     private ObservableList<Product> productList = FXCollections.observableArrayList();
-    @FXML
-    public void showProduct() {
-        productTable.setVisible(true);
-    }
+
+//    @FXML
+//    public void showProduct() {
+//        productTable.setVisible(true);
+//    }
 
     @FXML
     public void initialize() {
+        // Set up columns
         idColumn.setCellValueFactory(new PropertyValueFactory<>("id"));
         stockColumn.setCellValueFactory(new PropertyValueFactory<>("stock"));
         imageColumn.setCellValueFactory(new PropertyValueFactory<>("image"));
@@ -60,20 +66,29 @@ public class UserController {
         quantityColumn.setCellValueFactory(new PropertyValueFactory<>("quantity"));
         priceColumn.setCellValueFactory(new PropertyValueFactory<>("price"));
 
-        idColumn.getStyleClass().add("centered-column");
-        stockColumn.getStyleClass().add("centered-column");
-        nameColumn.getStyleClass().add("centered-column");
-        describeColumn.getStyleClass().add("centered-column");
-        quantityColumn.getStyleClass().add("centered-column");
-        priceColumn.getStyleClass().add("centered-column");
-
-        productTable.getStylesheets().add(getClass().getResource("/org/example/laptopthachthat/product.css").toExternalForm());
-
+        // Load initial data and set up filtering
         loadProducts();
-        productTable.setVisible(false);
-
-
         productTable.setItems(productList);
+//        productTable.setVisible(false);
+
+        // Filter products based on search text
+        searchField.textProperty().addListener((observable, oldValue, newValue) -> filterProducts(newValue));
+    }
+
+    private void filterProducts(String searchText) {
+        ObservableList<Product> filteredList = FXCollections.observableArrayList();
+
+        if (searchText == null || searchText.isEmpty()) {
+            filteredList.addAll(productList);
+        } else {
+            String lowerCaseFilter = searchText.toLowerCase();
+            for (Product product : productList) {
+                if (product.getName().toLowerCase().contains(lowerCaseFilter)) {
+                    filteredList.add(product);
+                }
+            }
+        }
+        productTable.setItems(filteredList);
     }
 
     private void loadProducts() {
@@ -102,7 +117,6 @@ public class UserController {
                         image = new Image(defaultImageUrl.toExternalForm());
                     } else {
                         System.err.println("Default image not found at the specified path.");
-
                         image = new Image("file:/absolute/path/to/local/image.png");
                     }
                 }
@@ -133,6 +147,7 @@ public class UserController {
             return false;
         }
     }
+
     @FXML
     private void BackToSignin(ActionEvent event) {
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION);

@@ -17,6 +17,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.EventObject;
 
 public class LoginController {
 
@@ -37,6 +38,13 @@ public class LoginController {
 
     @FXML
     public void signIn(ActionEvent actionEvent) throws SQLException, IOException {
+        Parent root = FXMLLoader.load(Main.class.getResource("UserDisplay.fxml"));
+        Stage stage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
+        Scene scene = new Scene(root);
+        stage.setTitle("User Profile");
+        stage.setScene(scene);
+        stage.show();
+
         String username = this.username.getText();
         String password = this.password.getText();
 
@@ -74,6 +82,7 @@ public class LoginController {
             showAlert("Tên người dùng hoặc mật khẩu không hợp lệ.");
             this.username.requestFocus();
         }
+
     }
 
     private String checkUser(String username, String password) throws SQLException {
@@ -124,6 +133,7 @@ public class LoginController {
         alert.setContentText(message);
         alert.showAndWait();
     }
+
 
 
 }

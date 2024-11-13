@@ -12,7 +12,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane stylesheets="@StyleUserInformation.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.laptopthachthat.InformationProfile">
+<BorderPane stylesheets="@login.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.laptopthachthat.User.InformationProfile">
     <center>
         <BorderPane prefHeight="800.0" prefWidth="1220.0" BorderPane.alignment="CENTER">
             <left>
@@ -42,7 +42,7 @@
                         </VBox>
                         <VBox prefHeight="320.0" prefWidth="340.0" spacing="15.0">
                             <children>
-                                <HBox fx:id="HboxUserInformation" alignment="CENTER" prefHeight="45.0" prefWidth="200.0" styleClass="selected" stylesheets="@StyleUserInformation.css">
+                                <HBox fx:id="HboxUserInformation" alignment="CENTER" prefHeight="45.0" prefWidth="200.0" styleClass="selected" stylesheets="@login.css">
                                     <children>
                                         <Label fx:id="updatedInfoLabel" layoutX="20" layoutY="200" text="" />
 

@@ -15,12 +15,8 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
-import org.example.laptopthachthat.Admin.Product;
 import org.example.laptopthachthat.ConectionJDBC;
 import org.example.laptopthachthat.Main;
-
-import java.io.BufferedWriter;
-import java.io.FileWriter;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.Connection;
@@ -48,10 +44,10 @@ public class HomeAdminController {
     private TableColumn<Product, Double> priceColumn;
 
     private ObservableList<Product> productList = FXCollections.observableArrayList();
-    @FXML
-    public void showProduct() {
-        productTable.setVisible(true);
-    }
+//    @FXML
+//    public void showProduct() {
+//        productTable.setVisible(true);
+//    }
 
     @FXML
     public void initialize() {
@@ -73,7 +69,7 @@ public class HomeAdminController {
         productTable.getStylesheets().add(getClass().getResource("/org/example/laptopthachthat/product.css").toExternalForm());
 
         loadProducts();
-        productTable.setVisible(false);
+//        productTable.setVisible(false);
 
 
         productTable.setItems(productList);
@@ -151,7 +147,6 @@ public class HomeAdminController {
             return false;
         }
     }
-//sadasdad
 
     @FXML
     public void addProduct(String productName, double price, int quantity, String description, boolean stock, String imageURL) {
@@ -408,14 +403,10 @@ public class HomeAdminController {
             }
         });
     }
-    public void DeleteProduct(ActionEvent actionEvent) {
-    }
 
-    public void UpdateProduct(ActionEvent actionEvent) {
-    }
     public void Account(ActionEvent event) throws IOException {
 
-        Parent root = FXMLLoader.load(Main.class.getResource("User.fxml"));
+        Parent root = FXMLLoader.load(Main.class.getResource("/org/example/laptopthachthat/User.fxml"));
         Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         Scene scene = new Scene(root);
         stage.setTitle("User Profile");

@@ -35,7 +35,7 @@
                         <Font size="24.0" />
                     </font>
                 </Button>
-            <Button fx:id="Product" layoutX="83.0" layoutY="265.0" mnemonicParsing="false" onAction="#showProduct" prefHeight="42.0" prefWidth="154.0" style="-fx-background-color: transprerant;" styleClass="my-account" stylesheets="@login.css" text="Product">
+            <Button fx:id="Product" layoutX="83.0" layoutY="265.0" mnemonicParsing="false"  prefHeight="42.0" prefWidth="154.0" style="-fx-background-color: transprerant;" styleClass="my-account" stylesheets="@login.css" text="Product">
                <font>
                   <Font size="33.0" />
                </font>
@@ -47,7 +47,7 @@
             <children>
                 <HBox alignment="CENTER" layoutX="11.0" layoutY="17.0" prefHeight="60.0" prefWidth="338.0" styleClass="search-box" stylesheets="@login.css">
                     <children>
-                        <TextField prefHeight="48.0" prefWidth="238.0" promptText="Type here to search" style="-fx-background-color: transparent;" />
+                        <TextField fx:id="searchField" prefHeight="48.0" prefWidth="238.0" promptText="Type here to search" style="-fx-background-color: transparent;" />
                         <Button mnemonicParsing="false" prefHeight="46.0" prefWidth="109.0" styleClass="search-button" stylesheets="@login.css" text="Search" />
                     </children>
                 </HBox>

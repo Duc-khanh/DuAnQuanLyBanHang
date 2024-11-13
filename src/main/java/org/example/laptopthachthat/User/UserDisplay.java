@@ -97,15 +97,15 @@ public class UserDisplay {
             }
         }
     }
+    public void BackToUser(ActionEvent event) throws IOException {
 
-    public void showProfile(ActionEvent event) throws IOException {
-
-        Parent root = FXMLLoader.load(Main.class.getResource("User.fxml"));
+        Parent root = FXMLLoader.load(Main.class.getResource("HomeAdmin.fxml"));
         Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         Scene scene = new Scene(root);
-        stage.setTitle("User Profile");
+        stage.setTitle("Sign up");
         stage.setScene(scene);
         stage.show();
     }
+
 }
 
