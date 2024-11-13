@@ -1,6 +1,5 @@
 package org.example.laptopthachthat.Admin;
 
-import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 
 public class Product {
@@ -11,7 +10,6 @@ public class Product {
     private String describe;
     private Boolean stock;
     private ImageView image;
-
 
     public Product(int id, String name, double price, int quantity, String describe, Boolean stock, ImageView image) {
         this.id = id;
@@ -60,21 +58,34 @@ public class Product {
     }
 
     public void setDescribe(String describe) {
-        describe = describe;
+        this.describe = describe;
     }
 
     public Boolean getStock() {
         return stock;
     }
+
     public void setStock(Boolean stock) {
-        stock = stock;
+        this.stock = stock;
     }
 
     public ImageView getImage() {
         return image;
     }
 
-    public void setImagePath(ImageView image) {
+    public void setImage(ImageView image) {
         this.image = image;
+    }
+
+    public boolean isAvailable() {
+        return stock != null && stock;
+    }
+
+    public void setAvailable(boolean available) {
+        this.stock = available;
+    }
+
+    public boolean isStock() {
+        return stock != null && stock;
     }
 }

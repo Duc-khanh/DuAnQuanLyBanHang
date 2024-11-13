@@ -14,8 +14,8 @@ public class Main extends Application {
     @Override
     public void start(Stage primaryStage) throws Exception {
         Stage = primaryStage;
-        FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("Login.fxml"));
-        Scene scene = new Scene(fxmlLoader.load(), 600, 400);
+        FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("HomeAdmin.fxml"));
+        Scene scene = new Scene(fxmlLoader.load());
         primaryStage.setTitle("Can Store");
         primaryStage.setScene(scene);
         primaryStage.show();

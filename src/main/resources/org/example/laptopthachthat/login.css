@@ -22,3 +22,23 @@
     -fx-background-color: #FFFFFF;
     -fx-background-radius: 100;
 }
+.my-account{
+    -fx-background-color: #D3D3D3;
+    -fx-background-radius: 30;
+}
+.VBox{
+    -fx-background-color: linear-gradient(to bottom left ,#00BFFF,#ADD8E6);
+}
+
+.button-label {
+
+    -fx-padding: 10 20;
+    -fx-alignment: center;
+    -fx-border-radius: 5;
+    -fx-background-radius: 5;
+}
+.button-label:hover {
+    -fx-background-color: #45a049;
+}
+
+
