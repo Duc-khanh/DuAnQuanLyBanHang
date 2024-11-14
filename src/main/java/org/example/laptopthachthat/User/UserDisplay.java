@@ -97,7 +97,7 @@ public class UserDisplay {
             }
         }
     }
-    public void BackToUser(ActionEvent event) throws IOException {
+    public void BackToAdmin(ActionEvent event) throws IOException {
 
         Parent root = FXMLLoader.load(Main.class.getResource("HomeAdmin.fxml"));
         Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
@@ -106,6 +106,7 @@ public class UserDisplay {
         stage.setScene(scene);
         stage.show();
     }
+
 
 }
 

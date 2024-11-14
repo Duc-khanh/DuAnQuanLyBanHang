@@ -16,6 +16,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.HBox;
 import javafx.stage.Stage;
 import org.example.laptopthachthat.Admin.Product;
 import org.example.laptopthachthat.ConectionJDBC;
@@ -27,6 +28,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.EventObject;
 
 public class UserController {
     @FXML
@@ -47,6 +49,10 @@ public class UserController {
     private TableColumn<Product, Double> priceColumn;
     @FXML
     private TextField searchField;
+    @FXML
+    private HBox HboxLogout;
+    @FXML
+    private HBox HboxInformation;
 
     private ObservableList<Product> productList = FXCollections.observableArrayList();
 
@@ -147,6 +153,25 @@ public class UserController {
             return false;
         }
     }
+    @FXML
+    private void switchToUserInformation(ActionEvent event) {
+        try {
+            Parent root = FXMLLoader.load(Main.class.getResource("/org/example/laptopthachthat/InformationProfile.fxml"));
+            Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            Scene scene = new Scene(root);
+            stage.setTitle("User Profile");
+            stage.setScene(scene);
+            stage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Lỗi");
+            alert.setHeaderText("Không thể tải trang thông tin người dùng");
+            alert.setContentText("Đã xảy ra lỗi khi cố gắng mở trang thông tin người dùng.");
+            alert.showAndWait();
+        }
+    }
+
 
     @FXML
     private void BackToSignin(ActionEvent event) {
@@ -171,6 +196,7 @@ public class UserController {
                 System.out.println("Cancel logout.");
             }
         });
+
     }
 
 }

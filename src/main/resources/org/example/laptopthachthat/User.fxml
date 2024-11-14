@@ -19,7 +19,7 @@
                 <TableColumn fx:id="addressColumn" minWidth="0.0" prefWidth="143.0" text="Adress" />
             </columns>
         </TableView>
-      <Button fx:id="infor" layoutX="308.0" layoutY="517.0" mnemonicParsing="false" onAction="#BackToUser" prefHeight="31.0" prefWidth="113.0" styleClass="search-button" stylesheets="@login.css" text="Back" />
+      <Button fx:id="infor" layoutX="308.0" layoutY="517.0" mnemonicParsing="false" onAction="#BackToAdmin" prefHeight="31.0" prefWidth="113.0" styleClass="search-button" stylesheets="@login.css" text="Back" />
     </children>
 
 </AnchorPane>

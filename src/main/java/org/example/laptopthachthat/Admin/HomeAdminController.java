@@ -358,7 +358,8 @@ public class HomeAdminController {
     private void updateProduct(int productId, String productName, double price, int quantity, String description, boolean stock, String imageURL) {
         String query = "UPDATE Products SET productName = ?, description = ?, quality = ?, price = ?, stock = ?, image = ? WHERE productID = ?";
 
-        try (Connection connection = ConectionJDBC.getConnection(); PreparedStatement statement = connection.prepareStatement(query)) {
+        try (Connection connection = ConectionJDBC.getConnection();
+             PreparedStatement statement = connection.prepareStatement(query)) {
 
             statement.setString(1, productName);
             statement.setString(2, description);
