@@ -1,4 +1,4 @@
-package org.example.laptopthachthat.Login;
+package org.example.laptopthachthat;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -17,6 +17,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.EventObject;
 
 public class LoginController {
 
@@ -37,6 +38,7 @@ public class LoginController {
 
     @FXML
     public void signIn(ActionEvent actionEvent) throws SQLException, IOException {
+
         String username = this.username.getText();
         String password = this.password.getText();
 
@@ -54,17 +56,12 @@ public class LoginController {
             switch (role) {
                 case "Admin":
                     showAlert("Đăng nhập thành công .Xin chào Admin   " + username);
-                    Main.changeScene("HomeAdmin.fxml");
+                    Main.changeScene("Admin/HomeAdmin.fxml");
                     break;
                 case "User":
                     showAlert("Đăng nhập thành công .Xin chào User");
 
-                    Main.changeScene("UserDashboard.fxml");
-                    break;
-                case "Customer":
-                    showAlert("Đăng nhập thành công .Xin chào Customer");
-
-                    Main.changeScene("CustomerDashboard.fxml");
+                    Main.changeScene("User/UserDisplay.fxml");
                     break;
                 default:
                     showAlert("Vai trò không được công nhận. ");
@@ -74,6 +71,7 @@ public class LoginController {
             showAlert("Tên người dùng hoặc mật khẩu không hợp lệ.");
             this.username.requestFocus();
         }
+
     }
 
     private String checkUser(String username, String password) throws SQLException {
@@ -83,18 +81,21 @@ public class LoginController {
             return null;
         }
 
-        String query = "SELECT * FROM user WHERE username=? AND password=?";
+        String query = "SELECT * FROM user WHERE LOWER(username)=LOWER(?) AND password=?";
         try (PreparedStatement ps = conn.prepareStatement(query)) {
             ps.setString(1, username);
             ps.setString(2, password);
             ResultSet rs = ps.executeQuery();
 
             if (rs.next()) {
+                int userID = rs.getInt("userID");
+                String name = rs.getString("username");
                 String state = rs.getString("state");
                 if (!"Active".equalsIgnoreCase(state)) {
                     showAlert("Your account is blocked. Please contact support.");
                     return null;
                 }
+                LoggedInUser.login(userID,name);
                 return rs.getString("role");
             } else {
                 return null;
@@ -106,9 +107,7 @@ public class LoginController {
         }
     }
 
-    public void switchToDisplayRegister(ActionEvent event) throws IOException {
 
-    }
 
     public void showSignUp(ActionEvent event) throws IOException {
 
@@ -127,6 +126,6 @@ public class LoginController {
         alert.showAndWait();
     }
 
-    public void TextLogin(ActionEvent actionEvent) {
-    }
+
+
 }

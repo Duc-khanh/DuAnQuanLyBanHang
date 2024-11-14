@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.VBox?>
+
+<VBox spacing="10" alignment="CENTER" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.laptopthachthat.Admin.AddProductController">
+   <TextField fx:id="nameField" promptText="Tên sản phẩm" />
+   <TextField fx:id="priceField" promptText="Giá" />
+   <TextField fx:id="quantityField" promptText="Số lượng" />
+   <TextField fx:id="descriptionField" promptText="Mô tả" />
+   <TextField fx:id="stockField" promptText="Còn hàng" />
+<!--   <CheckBox fx:id="stockField" text="Còn hàng" />-->
+   <TextField fx:id="imageField" promptText="URL hình ảnh" />
+   <Button text="Thêm sản phẩm" onAction="#addProductToDatabase" />
+
+</VBox>
+

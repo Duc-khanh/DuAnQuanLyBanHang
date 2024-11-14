@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.text.Font?>
+
+<?import javafx.scene.layout.VBox?>
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="854.0"
+            prefWidth="1560.0" style="-fx-background-color: #eceff1;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.laptopthachthat.User.UserController">
+    <children>
+        <AnchorPane prefHeight="866.0" prefWidth="320.0" styleClass="vbox_background_center" stylesheets="@../login.css">
+            <children>
+                <ImageView fitHeight="204.0" fitWidth="228.0" layoutX="55.0" layoutY="-5.0" pickOnBounds="true" preserveRatio="true">
+                    <image>
+                        <Image url="@../Image/pngtree-mummy-yellow-laptop-sticker-vector-png-image_12226763.png" />
+                    </image>
+                </ImageView>
+                <Label layoutX="47.0" layoutY="195.0" prefHeight="38.0" prefWidth="233.0" text="Laptop Thach That">
+                    <font>
+                        <Font name="SignPainter-HouseScript" size="36.0" />
+                    </font>
+                </Label>
+                <ImageView fitHeight="53.0" fitWidth="50.0" layoutX="31.0" layoutY="272.0" pickOnBounds="true" preserveRatio="true">
+                    <image>
+                        <Image url="@../Image/4439476.png" />
+                    </image>
+                </ImageView>
+                <Button layoutX="61.0" layoutY="742.0" mnemonicParsing="false" onAction="#BackToSignin" prefHeight="59.0" prefWidth="190.0" styleClass="search-button" stylesheets="@../login.css" text="Log out">
+                    <font>
+                        <Font size="24.0" />
+                    </font>
+                </Button>
+            <Button fx:id="Product" layoutX="83.0" layoutY="265.0" mnemonicParsing="false" prefHeight="42.0" prefWidth="154.0" style="-fx-background-color: transprerant;" styleClass="my-account" stylesheets="@../login.css" text="Product">
+               <font>
+                  <Font size="33.0" />
+               </font>
+            </Button>
+            </children>
+        </AnchorPane>
+
+        <AnchorPane layoutX="1050.0" layoutY="46.0" prefHeight="87.0" prefWidth="368.0">
+            <children>
+                <HBox alignment="CENTER" layoutX="11.0" layoutY="17.0" prefHeight="60.0" prefWidth="338.0" styleClass="search-box" stylesheets="@../login.css">
+                    <children>
+                        <TextField fx:id="searchField" prefHeight="48.0" prefWidth="238.0" promptText="Type here to search" style="-fx-background-color: transparent;" />
+                        <Button mnemonicParsing="false" prefHeight="46.0" prefWidth="109.0" styleClass="search-button" stylesheets="@../login.css" text="Search" />
+                    </children>
+                </HBox>
+            </children>
+        </AnchorPane>
+
+
+        <AnchorPane layoutX="309.0" layoutY="172.0" prefHeight="610.0" prefWidth="971.0">
+            <children>
+                <TableView fx:id="productTable" layoutX="8.0" layoutY="-2.0" prefHeight="677.0" prefWidth="1234.0">
+                    <columns>
+                        <TableColumn fx:id="idColumn" prefWidth="89.0" text="ID" />
+                        <TableColumn fx:id="stockColumn" prefWidth="97.0" text="Stock" />
+                        <TableColumn fx:id="imageColumn" prefWidth="149.0" text="Image" />
+                        <TableColumn fx:id="nameColumn" prefWidth="203.0" text="Name" />
+                        <TableColumn fx:id="describeColumn" prefWidth="219.0" text="Describe" />
+                        <TableColumn fx:id="quantityColumn" prefWidth="151.0" text="Quantity" />
+                        <TableColumn fx:id="priceColumn" minWidth="20.0" prefWidth="171.0" text="Price" />
+                    </columns>
+                </TableView>
+            </children>
+        </AnchorPane>
+
+        <AnchorPane>
+            <children>
+                <VBox alignment="CENTER" spacing="10" style="-fx-padding: 20;">
+                    <ImageView fx:id="productImage" fitWidth="200" fitHeight="200" />
+                    <Label fx:id="productName" style="-fx-font-size: 18px; -fx-font-weight: bold;" />
+                    <Label fx:id="productPrice" style="-fx-font-size: 16px;" />
+                    <Label fx:id="productDescription" wrapText="true" style="-fx-font-size: 14px;" />
+                    <Label fx:id="productStock" style="-fx-font-size: 14px;" />
+                    <Label fx:id="productQuantity" style="-fx-font-size: 14px;" />
+                    <HBox spacing="10">
+                        <Label text="Chọn số lượng:" style="-fx-font-size: 14px;"/>
+                        <TextField fx:id="quantity" promptText="Nhap so luong mua"/>
+                    </HBox>
+                    <Button text="Thên vào giỏ hàng" onAction="#HandleBuyButton"/>
+
+                </VBox>
+            </children>
+        </AnchorPane>
+
+        <ImageView fitHeight="46.0" fitWidth="59.0" layoutX="596.0" layoutY="82.0" pickOnBounds="true" preserveRatio="true">
+            <image>
+                <Image url="@../Image/1144760.png" />
+            </image>
+        </ImageView>
+        <ImageView fitHeight="65.0" fitWidth="75.0" layoutX="942.0" layoutY="68.0" pickOnBounds="true" preserveRatio="true">
+            <image>
+                <Image url="@../Image/3144456.png" />
+            </image>
+        </ImageView>
+      <Button layoutX="341.0" layoutY="49.0" mnemonicParsing="false" prefHeight="102.0" prefWidth="240.0" styleClass="my-account" stylesheets="@../login.css" text="My Account">
+         <font>
+            <Font name="Chalkboard SE Regular" size="30.0" />
+         </font>
+      </Button>
+      <Button layoutX="698.0" layoutY="47.0" mnemonicParsing="false" prefHeight="102.0" prefWidth="240.0" styleClass="my-account" stylesheets="@../login.css" text="My Cart" onAction="#openCart">
+         <font>
+            <Font name="Chalkboard SE Regular" size="30.0" />
+         </font>
+      </Button>
+    </children>
+</AnchorPane>
