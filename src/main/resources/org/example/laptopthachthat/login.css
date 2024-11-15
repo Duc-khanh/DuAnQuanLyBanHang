@@ -1,0 +1,52 @@
+.vbox_background_center{
+     -fx-background-color: linear-gradient(to bottom left ,#00CCFF,#99FFFF)
+}
+.vbox_background_right{
+    -fx-background-color:#EEE8AA ;
+}
+.search-box {
+    -fx-background-color: #FFFFFF;
+    -fx-background-radius: 50;
+}
+
+.search-button{
+    -fx-background-color: #00e5ff;
+    -fx-background-radius: 30;
+}
+.shadow {
+    -fx-effect: dropshadow(three-pass-box, rgba(0, 0, 0, 0.1), 10, 0, 0, 10);
+}
+
+.chosen-fruit-card{
+    -fx-background-radius: 30;
+}
+.click-buy{
+    -fx-background-color: #FFFFFF;
+    -fx-background-radius: 100;
+}
+.my-account{
+    -fx-background-color: #D3D3D3;
+    -fx-background-radius: 30;
+}
+.VBox{
+    -fx-background-color: linear-gradient(to bottom left ,#00BFFF,#ADD8E6);
+}
+
+.button-label {
+
+    -fx-padding: 10 20;
+    -fx-alignment: center;
+    -fx-border-radius: 5;
+    -fx-background-radius: 5;
+}
+.button-label:hover {
+    -fx-background-color: #45a049;
+}
+/* Căn giữa văn bản trong các ô của TableView */
+.table-cell {
+    -fx-alignment: CENTER;  /* Căn giữa */
+}
+
+
+
+
