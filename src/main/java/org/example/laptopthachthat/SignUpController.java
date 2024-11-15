@@ -1,4 +1,4 @@
-package org.example.laptopthachthat.Sign;
+package org.example.laptopthachthat;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -42,7 +42,6 @@ public class SignUpController {
         String address = this.address.getText().trim();
         String phoneNumber = this.phoneNumber.getText().trim();
 
-        // Validate inputs
         if (username.isEmpty() || password.isEmpty() || rePassword.isEmpty() || address.isEmpty() || phoneNumber.isEmpty()) {
             showAlert("All fields must be filled.");
         } else if (username.length() < 6) {

@@ -9,7 +9,7 @@ public class ConectionJDBC {
     private static String dbName = "LapTopThachThat";
     private static String username = "root";
 
-    private static String password = "root@123";
+    private static String password = "linhnhi234";
     private static String url = "jdbc:mysql://" + hostName + "/" + dbName;
 
     public static Connection getConnection() throws SQLException {

@@ -1,5 +1,7 @@
 package org.example.laptopthachthat.Admin;
 
+import javafx.beans.property.SimpleDoubleProperty;
+import javafx.beans.value.ObservableValue;
 import javafx.scene.image.ImageView;
 
 public class Product {
@@ -20,6 +22,10 @@ public class Product {
         this.stock = stock;
         this.image = image;
     }
+
+    public Product(Product product) {
+    }
+
 
     public int getId() {
         return id;
@@ -88,4 +94,11 @@ public class Product {
     public boolean isStock() {
         return stock != null && stock;
     }
+
+
+    public ObservableValue<Double> totalPriceProperty() {
+        return new SimpleDoubleProperty(price * quantity).asObject();
+    }
+
+
 }

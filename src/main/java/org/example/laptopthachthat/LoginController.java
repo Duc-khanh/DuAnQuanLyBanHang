@@ -1,4 +1,4 @@
-package org.example.laptopthachthat.Login;
+package org.example.laptopthachthat;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -38,6 +38,7 @@ public class LoginController {
 
     @FXML
     public void signIn(ActionEvent actionEvent) throws SQLException, IOException {
+
         Parent root = FXMLLoader.load(Main.class.getResource("UserDisplay.fxml"));
         Stage stage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
         Scene scene = new Scene(root);
@@ -62,17 +63,12 @@ public class LoginController {
             switch (role) {
                 case "Admin":
                     showAlert("Đăng nhập thành công .Xin chào Admin   " + username);
-                    Main.changeScene("HomeAdmin.fxml");
+                    Main.changeScene("Admin/HomeAdmin.fxml");
                     break;
                 case "User":
                     showAlert("Đăng nhập thành công .Xin chào User");
 
-                    Main.changeScene("UserDashboard.fxml");
-                    break;
-                case "Customer":
-                    showAlert("Đăng nhập thành công .Xin chào Customer");
-
-                    Main.changeScene("CustomerDashboard.fxml");
+                    Main.changeScene("User/UserDisplay.fxml");
                     break;
                 default:
                     showAlert("Vai trò không được công nhận. ");
@@ -92,18 +88,21 @@ public class LoginController {
             return null;
         }
 
-        String query = "SELECT * FROM user WHERE username=? AND password=?";
+        String query = "SELECT * FROM user WHERE LOWER(username)=LOWER(?) AND password=?";
         try (PreparedStatement ps = conn.prepareStatement(query)) {
             ps.setString(1, username);
             ps.setString(2, password);
             ResultSet rs = ps.executeQuery();
 
             if (rs.next()) {
+                int userID = rs.getInt("userID");
+                String name = rs.getString("username");
                 String state = rs.getString("state");
                 if (!"Active".equalsIgnoreCase(state)) {
                     showAlert("Your account is blocked. Please contact support.");
                     return null;
                 }
+                LoggedInUser.login(userID,name);
                 return rs.getString("role");
             } else {
                 return null;

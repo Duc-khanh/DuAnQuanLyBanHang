@@ -8,6 +8,11 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.*;
+import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+import javafx.stage.Modality;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.TableColumn;
@@ -50,14 +55,15 @@ public class UserController {
 
     private ObservableList<Product> productList = FXCollections.observableArrayList();
 
-//    @FXML
-//    public void showProduct() {
-//        productTable.setVisible(true);
-//    }
+    private ObservableList<Product> cartItems = FXCollections.observableArrayList();
+
+    @FXML
+    private void openCart() throws IOException {
+        Main.changeScene("User/CartView.fxml");
+    }
 
     @FXML
     public void initialize() {
-        // Set up columns
         idColumn.setCellValueFactory(new PropertyValueFactory<>("id"));
         stockColumn.setCellValueFactory(new PropertyValueFactory<>("stock"));
         imageColumn.setCellValueFactory(new PropertyValueFactory<>("image"));
@@ -66,14 +72,65 @@ public class UserController {
         quantityColumn.setCellValueFactory(new PropertyValueFactory<>("quantity"));
         priceColumn.setCellValueFactory(new PropertyValueFactory<>("price"));
 
-        // Load initial data and set up filtering
+
+        idColumn.getStyleClass().add("centered-column");
+        stockColumn.getStyleClass().add("centered-column");
+        nameColumn.getStyleClass().add("centered-column");
+        describeColumn.getStyleClass().add("centered-column");
+        quantityColumn.getStyleClass().add("centered-column");
+        priceColumn.getStyleClass().add("centered-column");
+
+        productTable.getStylesheets().add(getClass().getResource("/org/example/laptopthachthat/Admin/product.css").toExternalForm());
+
         loadProducts();
-        productTable.setItems(productList);
 //        productTable.setVisible(false);
 
-        // Filter products based on search text
+
+        productTable.setItems(productList);
+
+        productTable.setOnMouseClicked(event -> {
+            if (event.getClickCount() == 2) {
+                Product selectedProduct = productTable.getSelectionModel().getSelectedItem();
+                if (selectedProduct != null) {
+                    showProductDetails(selectedProduct);
+                }
+            }
+        });
+
         searchField.textProperty().addListener((observable, oldValue, newValue) -> filterProducts(newValue));
     }
+
+    private void showProductDetails(Product product) {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/org/example/laptopthachthat/User/ProductDetails.fxml"));
+            Parent root = loader.load();
+
+            ProductDetailsController controller = loader.getController();
+            controller.setProduct(product);
+
+            Stage stage = new Stage();
+            stage.setTitle("Product Details");
+            stage.setScene(new Scene(root));
+            stage.show();
+        } catch (IOException e) {
+            System.err.println("Error loading product details: " + e.getMessage());
+            e.printStackTrace();
+        }
+    }
+
+
+//    // Load initial data and set up filtering
+//    loadProducts();
+//        productTable.setItems(productList);
+////        productTable.setVisible(false);
+//
+//    // Filter products based on search text
+//        searchField.textProperty().
+//
+//    addListener((observable, oldValue, newValue) ->
+//
+//    filterProducts(newValue));
+//}
 
     private void filterProducts(String searchText) {
         ObservableList<Product> filteredList = FXCollections.observableArrayList();
@@ -93,8 +150,7 @@ public class UserController {
 
     private void loadProducts() {
         productList.clear();
-        String query = "SELECT productID, stock, image, productName, description, quality, price FROM Products";
-
+        String query = "SELECT productID, stock, image, productName, description, quantity, price FROM Products";
         try (Connection connection = ConectionJDBC.getConnection();
              PreparedStatement statement = connection.prepareStatement(query);
              ResultSet resultSet = statement.executeQuery()) {
@@ -123,7 +179,7 @@ public class UserController {
 
                 String productName = resultSet.getString("productName");
                 String description = resultSet.getString("description");
-                int quality = resultSet.getInt("quality");
+                int quality = resultSet.getInt("quantity");
                 double price = resultSet.getDouble("price");
 
                 ImageView imageView = new ImageView(image);
@@ -157,10 +213,12 @@ public class UserController {
         alert.showAndWait().ifPresent(response -> {
             if (response == ButtonType.OK) {
                 try {
+                    Main.changeScene("Login.fxml");
                     Parent root = FXMLLoader.load(getClass().getResource("/org/example/laptopthachthat/Login.fxml"));
                     Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
                     stage.setScene(new Scene(root));
                     stage.show();
+
 
                     System.out.println("Signed out successfully.");
                 } catch (IOException e) {
@@ -172,5 +230,4 @@ public class UserController {
             }
         });
     }
-
 }

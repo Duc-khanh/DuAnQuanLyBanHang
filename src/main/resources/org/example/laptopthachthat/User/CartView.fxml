@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane xmlns="http://javafx.com/javafx"
+            xmlns:fx="http://javafx.com/fxml"
+            fx:controller="org.example.laptopthachthat.User.CartController">
+
+    <VBox>
+        <Label text="Giỏ Hàng" style="-fx-font-size: 20px; -fx-font-weight: bold;" />
+
+        <TableView fx:id="cartTable">
+            <columns>
+                <TableColumn fx:id="idColumn" text="ID" prefWidth="50"/>
+                <TableColumn fx:id="nameColumn" text="Tên sản phẩm" prefWidth="200"/>
+                <TableColumn fx:id="quantityColumn" text="Số lượng" prefWidth="100"/>
+                <TableColumn fx:id="priceColumn" text="Giá" prefWidth="100"/>
+                <TableColumn fx:id="totalColumn" text="Tổng" prefWidth="100"/>
+            </columns>
+        </TableView>
+
+        <HBox spacing="10" alignment="CENTER_RIGHT">
+            <Label text="Tổng cộng:" style="-fx-font-size: 16px;"/>
+            <Label fx:id="totalAmount" style="-fx-font-size: 16px; -fx-font-weight: bold;" />
+            <Button text="Thanh toán" onAction="#handleCheckout"/>
+            <Button text="Back" onAction="#handleTransitions"/>
+        </HBox>
+    </VBox>
+</AnchorPane>
