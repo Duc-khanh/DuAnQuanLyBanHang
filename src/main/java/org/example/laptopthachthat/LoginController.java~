@@ -38,7 +38,7 @@ public class LoginController {
 
     @FXML
     public void signIn(ActionEvent actionEvent) throws SQLException, IOException {
-
+        
         String username = this.username.getText();
         String password = this.password.getText();
 

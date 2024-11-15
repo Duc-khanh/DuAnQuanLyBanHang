@@ -119,7 +119,18 @@ public class UserController {
     }
 
 
-
+//    // Load initial data and set up filtering
+//    loadProducts();
+//        productTable.setItems(productList);
+////        productTable.setVisible(false);
+//
+//    // Filter products based on search text
+//        searchField.textProperty().
+//
+//    addListener((observable, oldValue, newValue) ->
+//
+//    filterProducts(newValue));
+//}
 
     private void filterProducts(String searchText) {
         ObservableList<Product> filteredList = FXCollections.observableArrayList();
