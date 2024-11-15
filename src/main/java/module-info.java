@@ -19,4 +19,7 @@ module org.example.laptopthachthat {
 
     exports org.example.laptopthachthat.User;
     opens org.example.laptopthachthat.User to javafx.fxml;
+
+    exports org.example.laptopthachthat.Order; // Thêm dòng này để xuất package Order
+    opens org.example.laptopthachthat.Order to javafx.fxml; // Mở package Order cho javafx.fxml
 }

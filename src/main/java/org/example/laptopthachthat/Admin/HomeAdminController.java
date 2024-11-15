@@ -44,10 +44,7 @@ public class HomeAdminController {
     private TableColumn<Product, Double> priceColumn;
 
     private ObservableList<Product> productList = FXCollections.observableArrayList();
-//    @FXML
-//    public void showProduct() {
-//        productTable.setVisible(true);
-//    }
+
 
     @FXML
     public void initialize() {

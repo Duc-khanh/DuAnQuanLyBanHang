@@ -49,17 +49,8 @@ public class UserController {
     private TableColumn<Product, Double> priceColumn;
     @FXML
     private TextField searchField;
-    @FXML
-    private HBox HboxLogout;
-    @FXML
-    private HBox HboxInformation;
 
     private ObservableList<Product> productList = FXCollections.observableArrayList();
-
-//    @FXML
-//    public void showProduct() {
-//        productTable.setVisible(true);
-//    }
 
     @FXML
     public void initialize() {
@@ -72,12 +63,8 @@ public class UserController {
         quantityColumn.setCellValueFactory(new PropertyValueFactory<>("quantity"));
         priceColumn.setCellValueFactory(new PropertyValueFactory<>("price"));
 
-        // Load initial data and set up filtering
         loadProducts();
         productTable.setItems(productList);
-//        productTable.setVisible(false);
-
-        // Filter products based on search text
         searchField.textProperty().addListener((observable, oldValue, newValue) -> filterProducts(newValue));
     }
 
