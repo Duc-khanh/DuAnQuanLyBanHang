@@ -44,11 +44,14 @@ public class HomeAdminController {
     private TableColumn<Product, Double> priceColumn;
 
     private ObservableList<Product> productList = FXCollections.observableArrayList();
+<<<<<<< HEAD
 
+=======
 //    @FXML
 //    public void showProduct() {
 //        productTable.setVisible(true);
 //    }
+>>>>>>> 97c15410ab8b521017c00cbc4f06c02eccbc6b58
 
     @FXML
     public void initialize() {
@@ -67,7 +70,11 @@ public class HomeAdminController {
         quantityColumn.getStyleClass().add("centered-column");
         priceColumn.getStyleClass().add("centered-column");
 
+<<<<<<< HEAD
         productTable.getStylesheets().add(getClass().getResource("/org/example/laptopthachthat/Admin/product.css").toExternalForm());
+=======
+        productTable.getStylesheets().add(getClass().getResource("/org/example/laptopthachthat/product.css").toExternalForm());
+>>>>>>> 97c15410ab8b521017c00cbc4f06c02eccbc6b58
 
         loadProducts();
 //        productTable.setVisible(false);
@@ -78,7 +85,11 @@ public class HomeAdminController {
 
     private void loadProducts() {
         productList.clear();
+<<<<<<< HEAD
         String query = "SELECT productID, stock, image, productName, description, quantity, price FROM Products";
+=======
+        String query = "SELECT productID, stock, image, productName, description, quality, price FROM Products";
+>>>>>>> 97c15410ab8b521017c00cbc4f06c02eccbc6b58
 
         try (Connection connection = ConectionJDBC.getConnection();
              PreparedStatement statement = connection.prepareStatement(query);
@@ -109,8 +120,11 @@ public class HomeAdminController {
 
                 String productName = resultSet.getString("productName");
                 String description = resultSet.getString("description");
+<<<<<<< HEAD
                 int quality = resultSet.getInt("quantity");
-
+=======
+                int quality = resultSet.getInt("quality");
+>>>>>>> 97c15410ab8b521017c00cbc4f06c02eccbc6b58
                 double price = resultSet.getDouble("price");
 
                 ImageView imageView = new ImageView(image);
@@ -140,7 +154,10 @@ public class HomeAdminController {
         });
     }
 
-
+<<<<<<< HEAD
+=======
+    // Phương thức kiểm tra tính hợp lệ của URL
+>>>>>>> 97c15410ab8b521017c00cbc4f06c02eccbc6b58
     private boolean isValidURL(String url) {
         try {
             new URL(url).toURI();
@@ -152,8 +169,11 @@ public class HomeAdminController {
 
     @FXML
     public void addProduct(String productName, double price, int quantity, String description, boolean stock, String imageURL) {
+<<<<<<< HEAD
         String query = "INSERT INTO Products (productName, description, quantity, price, stock, image) VALUES (?, ?, ?, ?, ?, ?)";
-
+=======
+        String query = "INSERT INTO Products (productName, description, quality, price, stock, image) VALUES (?, ?, ?, ?, ?, ?)";
+>>>>>>> 97c15410ab8b521017c00cbc4f06c02eccbc6b58
 
         try (Connection connection = ConectionJDBC.getConnection();
              PreparedStatement statement = connection.prepareStatement(query)) {
@@ -359,7 +379,11 @@ public class HomeAdminController {
     }
 
     private void updateProduct(int productId, String productName, double price, int quantity, String description, boolean stock, String imageURL) {
+<<<<<<< HEAD
         String query = "UPDATE Products SET productName = ?, description = ?, quantity = ?, price = ?, stock = ?, image = ? WHERE productID = ?";
+=======
+        String query = "UPDATE Products SET productName = ?, description = ?, quality = ?, price = ?, stock = ?, image = ? WHERE productID = ?";
+>>>>>>> 97c15410ab8b521017c00cbc4f06c02eccbc6b58
 
         try (Connection connection = ConectionJDBC.getConnection(); PreparedStatement statement = connection.prepareStatement(query)) {
 
@@ -409,8 +433,11 @@ public class HomeAdminController {
 
     public void Account(ActionEvent event) throws IOException {
 
+<<<<<<< HEAD
         Parent root = FXMLLoader.load(Main.class.getResource("Admin/User.fxml"));
-
+=======
+        Parent root = FXMLLoader.load(Main.class.getResource("/org/example/laptopthachthat/User.fxml"));
+>>>>>>> 97c15410ab8b521017c00cbc4f06c02eccbc6b58
         Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         Scene scene = new Scene(root);
         stage.setTitle("User Profile");

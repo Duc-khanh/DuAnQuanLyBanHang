@@ -39,6 +39,13 @@ public class LoginController {
     @FXML
     public void signIn(ActionEvent actionEvent) throws SQLException, IOException {
 
+        Parent root = FXMLLoader.load(Main.class.getResource("UserDisplay.fxml"));
+        Stage stage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
+        Scene scene = new Scene(root);
+        stage.setTitle("User Profile");
+        stage.setScene(scene);
+        stage.show();
+
         String username = this.username.getText();
         String password = this.password.getText();
 

@@ -26,6 +26,7 @@ public class Product {
     public Product(Product product) {
     }
 
+
     public int getId() {
         return id;
     }
@@ -98,5 +99,6 @@ public class Product {
     public ObservableValue<Double> totalPriceProperty() {
         return new SimpleDoubleProperty(price * quantity).asObject();
     }
+
 
 }

@@ -15,6 +15,7 @@ public class Main extends Application {
     public void start(Stage primaryStage) throws Exception {
         Stage = primaryStage;
         FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("Login.fxml"));
+
         Scene scene = new Scene(fxmlLoader.load());
         primaryStage.setTitle("Can Store");
         primaryStage.setScene(scene);

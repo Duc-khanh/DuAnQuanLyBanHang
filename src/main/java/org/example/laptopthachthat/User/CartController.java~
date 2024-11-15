@@ -84,20 +84,17 @@ public class CartController {
 
 
     public void handleCheckout(ActionEvent actionEvent) throws IOException, SQLException {
-      if(showAlert("Bạn có chắc chắn muốn đặt đơn ?")){
-          int orderID = addOrder(LoggedInUser.getInstance().getUserID(), LocalDateTime.now());
-          for (Cart cartItem : cartTable.getItems()) {
-              int quantity = cartItem.getQuantity();
-              int cartID = cartItem.getCartID();
-              int productID = getProductIDFromCart(cartID);
-              addCart_Order(cartID, orderID, quantity);
-              updateQuantityProduct(productID, quantity);
+        int orderID = addOrder(LoggedInUser.getInstance().getUserID(), LocalDateTime.now());
+        for (Cart cartItem : cartTable.getItems()) {
+            int quantity = cartItem.getQuantity();
+            int cartID = cartItem.getCartID();
+            int productID = getProductIDFromCart(cartID);
+            addCart_Order(cartID, orderID, quantity);
+            updateQuantityProduct(productID, quantity);
 
-          }
-          System.out.println("Thêm vào Cart_Order,Order,Cập nhật số lượng sản phẩm");
-          showAlert("Đặt đơn hàng thành công");
-          Main.changeScene("User/UserDisplay.fxml");
-      }
+        }
+        System.out.println("Thêm vào Cart_Order,Order,Cập nhật số lượng sản phẩm");
+        Main.changeScene("User/Order.fxml");
     }
     private int getProductIDFromCart(int cartID) throws SQLException {
         String query = "SELECT productID FROM cart WHERE cartID = ?";
@@ -163,12 +160,6 @@ public class CartController {
     }
     public void handleTransitions(ActionEvent actionEvent) throws IOException {
         Main.changeScene("User/UserDisplay.fxml");
-    }
-    public boolean showAlert(String message) {
-        Alert alert = new Alert(Alert.AlertType.INFORMATION);
-        alert.setTitle("Đặt hàng thành công");
-        alert.setContentText(message);
-        return alert.showAndWait().get() == ButtonType.OK;
     }
 }
 
