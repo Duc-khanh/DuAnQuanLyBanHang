@@ -3,21 +3,21 @@
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.*?>
 
-<!--<AnchorPane xmlns:fx="http://javafx.com/fxml" fx:controller="org.example.laptopthachthat.User.ProductDetailsController">-->
-<!--    <children>-->
-<!--        <VBox alignment="CENTER" spacing="10" style="-fx-padding: 20;">-->
-<!--            <ImageView fx:id="productImage" fitWidth="200" fitHeight="200" />-->
-<!--            <Label fx:id="productName" style="-fx-font-size: 18px; -fx-font-weight: bold;" />-->
-<!--            <Label fx:id="productPrice" style="-fx-font-size: 16px;" />-->
-<!--            <Label fx:id="productDescription" wrapText="true" style="-fx-font-size: 14px;" />-->
-<!--            <Label fx:id="productStock" style="-fx-font-size: 14px;" />-->
-<!--            <Label fx:id="productQuantity" style="-fx-font-size: 14px;" />-->
-<!--            <HBox spacing="10">-->
-<!--                <Label text="Chọn số lượng:" style="-fx-font-size: 14px;"/>-->
-<!--                <TextField fx:id="quantity" promptText="Nhap so luong mua"/>-->
-<!--            </HBox>-->
-<!--            <Button text="Thên vào giỏ hàng" onAction="#HandleBuyButton"/>-->
+<AnchorPane xmlns:fx="http://javafx.com/fxml" fx:controller="org.example.laptopthachthat.User.ProductDetailsController">
+    <children>
+        <VBox alignment="CENTER" spacing="10" style="-fx-padding: 20;">
+            <ImageView fx:id="productImage" fitWidth="200" fitHeight="200" />
+            <Label fx:id="productName" style="-fx-font-size: 18px; -fx-font-weight: bold;" />
+            <Label fx:id="productPrice" style="-fx-font-size: 16px;" />
+            <Label fx:id="productDescription" wrapText="true" style="-fx-font-size: 14px;" />
+            <Label fx:id="productStock" style="-fx-font-size: 14px;" />
+            <Label fx:id="productQuantity" style="-fx-font-size: 14px;" />
+            <HBox spacing="10">
+                <Label text="Chọn số lượng:" style="-fx-font-size: 14px;"/>
+                <TextField fx:id="quantity" promptText="Nhap so luong mua"/>
+            </HBox>
+            <Button text="Thên vào giỏ hàng" onAction="#HandleBuyButton"/>
 
-<!--        </VBox>-->
-<!--    </children>-->
-<!--</AnchorPane>-->
+        </VBox>
+    </children>
+</AnchorPane>

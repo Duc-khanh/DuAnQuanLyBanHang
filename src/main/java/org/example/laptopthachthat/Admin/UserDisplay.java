@@ -1,4 +1,4 @@
-package org.example.laptopthachthat.User;
+package org.example.laptopthachthat.Admin;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -14,6 +14,7 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 import org.example.laptopthachthat.ConectionJDBC;
 import org.example.laptopthachthat.Main;
+import org.example.laptopthachthat.User.User;
 
 import java.io.IOException;
 import java.sql.Connection;
@@ -60,7 +61,7 @@ public class UserDisplay {
 
         try {
             connection = ConectionJDBC.getConnection();
-            String query = "SELECT * FROM User WHERE role = 'Customer'";
+            String query = "SELECT * FROM User WHERE role = 'User'";
             statement = connection.prepareStatement(query);
             resultSet = statement.executeQuery();
 
@@ -97,7 +98,7 @@ public class UserDisplay {
 
     public void BackToUser(ActionEvent event) throws IOException {
 
-        Parent root = FXMLLoader.load(Main.class.getResource("HomeAdmin.fxml"));
+        Parent root = FXMLLoader.load(Main.class.getResource("Admin/HomeAdmin.fxml"));
         Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         Scene scene = new Scene(root);
         stage.setTitle("Sign up");

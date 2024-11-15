@@ -9,7 +9,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="899.0" prefWidth="1440.0" style="-fx-background-color: #eceff1;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.laptopthachthat.Admin.HomeAdminController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="899.0" prefWidth="1440.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.laptopthachthat.Admin.HomeAdminController">
     <children>
         <AnchorPane layoutX="0" layoutY="0" prefHeight="898.0" prefWidth="320.0" styleClass="vbox_background_center" stylesheets="@../login.css">
             <children>
@@ -18,7 +18,7 @@
                         <Image url="@../Image/pngtree-mummy-yellow-laptop-sticker-vector-png-image_12226763.png" />
                     </image>
                 </ImageView>
-                <Label layoutX="47.0" layoutY="195.0" prefHeight="38.0" prefWidth="233.0" text="Laptop Thach That">
+                <Label layoutX="47.0" layoutY="195.0" prefHeight="53.0" prefWidth="249.0" text="Laptop Thach That">
                     <font>
                         <Font name="SignPainter-HouseScript" size="36.0" />
                     </font>
@@ -38,12 +38,12 @@
                         <Font size="24.0" />
                     </font>
                 </Button>
-            <Button fx:id="showProfile" layoutX="64.0" layoutY="332.0" mnemonicParsing="false" onAction="#Account" prefHeight="71.0" prefWidth="203.0" style="-fx-background-color: transprerant;" styleClass="my-account" stylesheets="@../login.css" text="Account ">
+            <Button layoutX="64.0" layoutY="332.0" mnemonicParsing="false" onAction="#Account" prefHeight="71.0" prefWidth="203.0" style="-fx-background-color: transparent;" styleClass="my-account" stylesheets="@../login.css" text="Account ">
                <font>
                   <Font size="37.0" />
                </font>
             </Button>
-            <Button fx:id="product" layoutX="63.0" layoutY="264.0" mnemonicParsing="false" prefHeight="71.0" prefWidth="203.0" style="-fx-background-color: transprerant;" styleClass="my-account" stylesheets="@../login.css" text="Product">
+            <Button layoutX="63.0" layoutY="264.0" mnemonicParsing="false" prefHeight="71.0" prefWidth="203.0" style="-fx-background-color: transparent;" styleClass="my-account" stylesheets="@../login.css" text="Product">
                <font>
                   <Font size="37.0" />
                </font>
@@ -51,14 +51,24 @@
             </children>
         </AnchorPane>
 
-        <AnchorPane layoutX="1050.0" layoutY="46.0" prefHeight="87.0" prefWidth="368.0">
-            <children>
-                <Button fx:id="DeleteButton" layoutX="70.0" layoutY="18.0" mnemonicParsing="false" onAction="#deleteProduct" prefHeight="76.0" prefWidth="215.0" styleClass="my-account" stylesheets="@../login.css" text="Status">
+        <AnchorPane layoutX="352.0" layoutY="48.0" prefHeight="87.0" prefWidth="1427.0">
+         <children>
+              <Button fx:id="AddButton" mnemonicParsing="false" onAction="#showDisplayAdd" prefHeight="76.0" prefWidth="215.0" styleClass="my-account" stylesheets="@../login.css" text="Add " AnchorPane.bottomAnchor="10.0">
+                  <font>
+                      <Font name="Chalkboard SE Regular" size="30.0" />
+                  </font>
+              </Button>
+                <Button fx:id="DeleteButton" layoutX="31.0" layoutY="7.0" mnemonicParsing="false" onAction="#deleteProduct" prefHeight="76.0" prefWidth="215.0" styleClass="my-account" stylesheets="@../login.css" text="Status" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="700.0">
                     <font>
                         <Font name="Chalkboard SE Regular" size="30.0" />
                     </font>
                 </Button>
-            </children>
+              <Button fx:id="UpdateButton" mnemonicParsing="false" onAction="#updateProduct" prefHeight="76.0" prefWidth="263.0" styleClass="my-account" stylesheets="@../login.css" text="Update " AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="350.0">
+                  <font>
+                      <Font name="Chalkboard SE Regular" size="30.0" />
+                  </font>
+              </Button>
+         </children>
         </AnchorPane>
 
 
@@ -78,15 +88,5 @@
                 </TableView>
             </children>
         </AnchorPane>
-        <Button fx:id="AddButton" layoutX="389.0" layoutY="64.0" mnemonicParsing="false" onAction="#showDisplayAdd" prefHeight="76.0" prefWidth="215.0" styleClass="my-account" stylesheets="@../login.css" text="Add ">
-            <font>
-                <Font name="Chalkboard SE Regular" size="30.0" />
-            </font>
-        </Button>
-        <Button fx:id="UpdateButton" layoutX="738.0" layoutY="65.0" mnemonicParsing="false" onAction="#updateProduct" prefHeight="76.0" prefWidth="263.0" styleClass="my-account" stylesheets="@../login.css" text="Update ">
-            <font>
-                <Font name="Chalkboard SE Regular" size="30.0" />
-            </font>
-        </Button>
     </children>
 </AnchorPane>

@@ -32,10 +32,8 @@ public class UserController {
     public Label productDescription;
     public Label productPrice;
     public ImageView productImage;
-    public Label productName;
-
     @FXML
-    private TableView<Product> productTable; // Chỉ giữ khai báo này
+    private TableView<Product> productTable;
     @FXML
     private TableColumn<Product, Integer> idColumn;
     @FXML
@@ -50,28 +48,9 @@ public class UserController {
     private TableColumn<Product, Integer> quantityColumn;
     @FXML
     private TableColumn<Product, Double> priceColumn;
+
     @FXML
     private TextField searchField;
-
-    // TableView khác mà bạn muốn chuyển đổi
-    @FXML
-    private TableView<Product> anotherProductTable;
-
-    @FXML
-    private void switchToAnotherTableView() {
-        productTable.setVisible(false);
-        anotherProductTable.setVisible(true);
-    }
-
-    @FXML
-    private void switchToProductTableView() {
-        productTable.setVisible(true);
-        anotherProductTable.setVisible(false);
-    }
-
-
-
-
 
     private ObservableList<Product> productList = FXCollections.observableArrayList();
     private ObservableList<Product> cartItems = FXCollections.observableArrayList();
@@ -91,7 +70,19 @@ public class UserController {
         quantityColumn.setCellValueFactory(new PropertyValueFactory<>("quantity"));
         priceColumn.setCellValueFactory(new PropertyValueFactory<>("price"));
 
+        idColumn.getStyleClass().add("centered-column");
+        stockColumn.getStyleClass().add("centered-column");
+        nameColumn.getStyleClass().add("centered-column");
+        describeColumn.getStyleClass().add("centered-column");
+        quantityColumn.getStyleClass().add("centered-column");
+        priceColumn.getStyleClass().add("centered-column");
+
+        productTable.getStylesheets().add(getClass().getResource("/org/example/laptopthachthat/Admin/product.css").toExternalForm());
+
         loadProducts();
+//        productTable.setVisible(false);
+
+
         productTable.setItems(productList);
 
         productTable.setOnMouseClicked(event -> {
@@ -221,9 +212,5 @@ public class UserController {
     }
 
     public void updateCartDisplay(ObservableList<Product> cartItems) {
-    }
-
-    public void HandleBuyButton(ActionEvent actionEvent) {
-
     }
 }

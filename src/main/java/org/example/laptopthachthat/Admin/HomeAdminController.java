@@ -44,10 +44,7 @@ public class HomeAdminController {
     private TableColumn<Product, Double> priceColumn;
 
     private ObservableList<Product> productList = FXCollections.observableArrayList();
-//    @FXML
-//    public void showProduct() {
-//        productTable.setVisible(true);
-//    }
+
 
     @FXML
     public void initialize() {
@@ -108,7 +105,7 @@ public class HomeAdminController {
 
                 String productName = resultSet.getString("productName");
                 String description = resultSet.getString("description");
-                int quality = resultSet.getInt("quality");
+                int quality = resultSet.getInt("quantity");
                 double price = resultSet.getDouble("price");
 
                 ImageView imageView = new ImageView(image);
@@ -138,7 +135,6 @@ public class HomeAdminController {
         });
     }
 
-    // Phương thức kiểm tra tính hợp lệ của URL
     private boolean isValidURL(String url) {
         try {
             new URL(url).toURI();
@@ -406,7 +402,7 @@ public class HomeAdminController {
 
     public void Account(ActionEvent event) throws IOException {
 
-        Parent root = FXMLLoader.load(Main.class.getResource("/org/example/laptopthachthat/User/User.fxml"));
+        Parent root = FXMLLoader.load(Main.class.getResource("Admin/User.fxml"));
         Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         Scene scene = new Scene(root);
         stage.setTitle("User Profile");

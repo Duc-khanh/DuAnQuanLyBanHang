@@ -42,6 +42,11 @@
 .button-label:hover {
     -fx-background-color: #45a049;
 }
+/* Căn giữa văn bản trong các ô của TableView */
+.table-cell {
+    -fx-alignment: CENTER;  /* Căn giữa */
+}
+
 
 
 
