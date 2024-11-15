@@ -70,7 +70,6 @@ public class HomeAdminController {
         productTable.getStylesheets().add(getClass().getResource("/org/example/laptopthachthat/Admin/product.css").toExternalForm());
 
         loadProducts();
-//        productTable.setVisible(false);
 
 
         productTable.setItems(productList);
@@ -125,20 +124,7 @@ public class HomeAdminController {
             e.printStackTrace();
         }
     }
-    private <T> void centerColumnData(TableColumn<Product, T> column) {
-        column.setCellFactory(tc -> new TableCell<>() {
-            @Override
-            protected void updateItem(T item, boolean empty) {
-                super.updateItem(item, empty);
-                if (empty || item == null) {
-                    setText(null);
-                } else {
-                    setText(item.toString());
-                    setAlignment(Pos.CENTER);
-                }
-            }
-        });
-    }
+
 
 
     private boolean isValidURL(String url) {
@@ -361,7 +347,8 @@ public class HomeAdminController {
     private void updateProduct(int productId, String productName, double price, int quantity, String description, boolean stock, String imageURL) {
         String query = "UPDATE Products SET productName = ?, description = ?, quantity = ?, price = ?, stock = ?, image = ? WHERE productID = ?";
 
-        try (Connection connection = ConectionJDBC.getConnection(); PreparedStatement statement = connection.prepareStatement(query)) {
+        try (Connection connection = ConectionJDBC.getConnection();
+             PreparedStatement statement = connection.prepareStatement(query)) {
 
             statement.setString(1, productName);
             statement.setString(2, description);
@@ -391,10 +378,8 @@ public class HomeAdminController {
         alert.showAndWait().ifPresent(response -> {
             if (response == ButtonType.OK) {
                 try {
-                    Parent root = FXMLLoader.load(getClass().getResource("/org/example/laptopthachthat/Login.fxml"));
-                    Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-                    stage.setScene(new Scene(root));
-                    stage.show();
+                    Main.changeScene("Login.fxml");
+
 
                     System.out.println("Signed out successfully.");
                 } catch (IOException e) {
@@ -408,13 +393,6 @@ public class HomeAdminController {
     }
 
     public void Account(ActionEvent event) throws IOException {
-
-        Parent root = FXMLLoader.load(Main.class.getResource("Admin/User.fxml"));
-
-        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        Scene scene = new Scene(root);
-        stage.setTitle("User Profile");
-        stage.setScene(scene);
-        stage.show();
+        Main.changeScene("Admin/User.fxml");
     }
 }
