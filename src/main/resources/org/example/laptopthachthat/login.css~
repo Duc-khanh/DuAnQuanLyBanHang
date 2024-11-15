@@ -42,12 +42,14 @@
 .button-label:hover {
     -fx-background-color: #45a049;
 }
-
+<<<<<<< HEAD
 /* Căn giữa văn bản trong các ô của TableView */
 .table-cell {
     -fx-alignment: CENTER;  /* Căn giữa */
 }
 
 
+=======
+>>>>>>> 97c15410ab8b521017c00cbc4f06c02eccbc6b58
 
 
